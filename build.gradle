@@ -14,7 +14,62 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     implementation 'net.dv8tion:JDA:4.2.0_227'
-    implementation 'com.discord4j:discord4j-core:3.1.3'
+    //implementation 'com.discord4j:discord4j-core:3.1.3'
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12
+    //testImplementation 'org.slf4j:slf4j-log4j12:2.0.0-alpha1'
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    //implementation 'org.slf4j:slf4j-api:2.0.0-alpha1'
+    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+    //implementation 'org.apache.logging.log4j:log4j-core:2.14.0'
+    // https://mvnrepository.com/artifact/com.discord4j/discord-json-api
+    compile group: 'com.discord4j', name: 'discord-json-api', version: '1.6.0'
+// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.1'
+// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.12.1'
+// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.12.1'
+// https://mvnrepository.com/artifact/com.discord4j/discord4j-core
+    compile group: 'com.discord4j', name: 'discord4j-core', version: '3.2.0-M1'
+// https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.8.0-beta4'
+// https://mvnrepository.com/artifact/com.discord4j/stores-jdk
+    compile group: 'com.discord4j', name: 'stores-jdk', version: '3.1.5'
+// https://mvnrepository.com/artifact/com.discord4j/stores-api
+    compile group: 'com.discord4j', name: 'stores-api', version: '3.1.5'
+// https://mvnrepository.com/artifact/com.discord4j/discord-json
+    compile group: 'com.discord4j', name: 'discord-json', version: '1.6.0'
+// https://mvnrepository.com/artifact/com.discord4j/discord-json-api
+    compile group: 'com.discord4j', name: 'discord-json-api', version: '1.6.0'
+// https://mvnrepository.com/artifact/com.discord4j/discord4j-rest
+    compile group: 'com.discord4j', name: 'discord4j-rest', version: '3.2.0-M1'
+// https://mvnrepository.com/artifact/com.discord4j/discord4j-common
+    compile group: 'com.discord4j', name: 'discord4j-common', version: '3.2.0-M1'
+// https://mvnrepository.com/artifact/com.discord4j/discord4j-gateway
+    compile group: 'com.discord4j', name: 'discord4j-gateway', version: '3.2.0-M1'
+    // https://mvnrepository.com/artifact/com.discord4j/discord4j-voice
+    compile group: 'com.discord4j', name: 'discord4j-voice', version: '3.2.0-M1'
+// https://mvnrepository.com/artifact/io.projectreactor.addons/reactor-extra
+    compile group: 'io.projectreactor.addons', name: 'reactor-extra', version: '3.4.2'
+// https://mvnrepository.com/artifact/io.projectreactor/reactor-core
+    compile group: 'io.projectreactor', name: 'reactor-core', version: '3.4.2'
+// https://mvnrepository.com/artifact/org.reactivestreams/reactive-streams
+    compile group: 'org.reactivestreams', name: 'reactive-streams', version: '1.0.3'
+// https://mvnrepository.com/artifact/com.discord4j/simple-fsm
+    compile group: 'com.discord4j', name: 'simple-fsm', version: '1.0.1', ext: 'pom'
+// https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jdk8
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: '2.12.1'
+// https://mvnrepository.com/artifact/io.projectreactor.addons/reactor-extra
+    compile group: 'io.projectreactor.addons', name: 'reactor-extra', version: '3.4.2'
+// https://mvnrepository.com/artifact/io.projectreactor/reactor-core
+    compile group: 'io.projectreactor', name: 'reactor-core', version: '3.4.2'
+// https://mvnrepository.com/artifact/io.projectreactor.netty/reactor-netty
+    compile group: 'io.projectreactor.netty', name: 'reactor-netty', version: '1.0.3'
+// https://mvnrepository.com/artifact/io.projectreactor.netty/reactor-netty-core
+    compile group: 'io.projectreactor.netty', name: 'reactor-netty-core', version: '1.0.3'
+// https://mvnrepository.com/artifact/io.projectreactor.netty/reactor-netty-http
+    compile group: 'io.projectreactor.netty', name: 'reactor-netty-http', version: '1.0.3'
+
 }
 
 test {
