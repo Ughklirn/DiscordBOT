@@ -6,10 +6,10 @@ import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.ughklirn.audio.PlayerManager;
-import net.ughklirn.listener.LogMessageListener;
-import net.ughklirn.listener.MusicListener;
-import net.ughklirn.listener.RolesListener;
+import net.ughklirn.listener.CommandListener;
 import net.ughklirn.utils.DiscordCred;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.security.auth.login.LoginException;
 import java.io.BufferedReader;
@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BOTImpl implements BOT {
+    private static final Logger L = LoggerFactory.getLogger(BOTImpl.class);
     private JDA jda;
     private AudioPlayerManager apm;
     private PlayerManager pm;
@@ -37,9 +38,7 @@ public class BOTImpl implements BOT {
 
     @Override
     public void run() {
-        jda.addEventListener(new LogMessageListener());
-        jda.addEventListener(new RolesListener(this.jda));
-        jda.addEventListener(new MusicListener());
+        jda.addEventListener(new CommandListener());
     }
 
     public AudioPlayerManager getAudioPlayerManager() {

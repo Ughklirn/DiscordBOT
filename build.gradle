@@ -21,28 +21,22 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     implementation 'net.dv8tion:JDA:4.2.0_227'
     implementation 'com.sedmelluq:lavaplayer:1.3.71'
+
+    /* ABI dependencies */
+
+    //Code safety
+    implementation("com.google.code.findbugs:jsr305:3.0.2")
+    implementation("org.jetbrains:annotations:16.0.1")
+
+    //Logger
+    implementation("org.slf4j:slf4j-api:1.7.25")
+
+    //Web Connection Support
+    implementation("com.neovisionaries:nv-websocket-client:2.9")
+    implementation("com.squareup.okhttp3:okhttp:3.13.0")
+    implementation("org.apache.cassandra:cassandra-all:0.8.1")
 }
 
 test {
     useJUnitPlatform()
 }
-
-//jar {
-//    manifest {
-//        attributes(
-//                'Main-Class': 'net.ughklirn.Start'
-//        )
-//    }
-//    from {
-//        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-//    }
-//}
-//
-//task jarWithDependency(type: Jar) {
-//    manifest {
-//        attributes 'Main-Class': 'net.ughklirn.Start'
-//    }
-//    from {
-//        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-//    } with jar
-//}

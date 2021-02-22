@@ -3,10 +3,13 @@ package net.ughklirn;
 import net.dv8tion.jda.api.sharding.ShardManager;
 import net.ughklirn.bot.BOT;
 import net.ughklirn.bot.BOTImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.security.auth.login.LoginException;
 
 public class Start {
+    private static final Logger L = LoggerFactory.getLogger(Start.class);
     private ShardManager sm;
 
     public static void main(String[] args) throws LoginException {
