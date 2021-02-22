@@ -5,7 +5,7 @@ import net.dv8tion.jda.api.entities.ChannelType;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.ughklirn.DiscordCred;
+import net.ughklirn.utils.DiscordCred;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -31,13 +31,13 @@ public class RolesListener extends ListenerAdapter {
                     this.readLists();
                     String[] msg = event.getMessage().getContentDisplay().split(" ");
                     switch (msg[0]) {
-                        case "%join":
+                        case DiscordCred.BOT_CMD_PREFIX + DiscordCred.BOT_CMD_ROLE_JOIN:
                             this.join(event, msg[1]);
                             break;
-                        case "%leave":
+                        case DiscordCred.BOT_CMD_PREFIX + DiscordCred.BOT_CMD_ROLE_LEAVE:
                             this.leave(event, msg[1]);
                             break;
-                        case "%test":
+                        case DiscordCred.BOT_CMD_PREFIX + DiscordCred.BOT_CMD_TEST:
                             this.test(event);
                             break;
                         default:
@@ -93,14 +93,14 @@ public class RolesListener extends ListenerAdapter {
         this.lRoleClans = new ArrayList<>();
 
         try {
-            fr = new FileReader("src/main/resources/games.txt");
+            fr = new FileReader(DiscordCred.BOT_PATH_GAMES);
             br = new BufferedReader(fr);
             String game;
             while ((game = br.readLine()) != null) {
                 lRoleGames.add(game);
             }
 
-            fr = new FileReader("src/main/resources/clans.txt");
+            fr = new FileReader(DiscordCred.BOT_PATH_CLAN);
             br = new BufferedReader(fr);
             String clan;
             while ((clan = br.readLine()) != null) {

@@ -2,8 +2,8 @@ package net.ughklirn.audio;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import net.dv8tion.jda.api.entities.Guild;
-import net.ughklirn.BOTImpl;
-import net.ughklirn.DiscordCred;
+import net.ughklirn.bot.BOTImpl;
+import net.ughklirn.utils.DiscordCred;
 
 public class MusicController {
     private Guild guild;

@@ -1,6 +1,6 @@
 package net.ughklirn.audio;
 
-import net.ughklirn.BOTImpl;
+import net.ughklirn.bot.BOTImpl;
 
 import java.util.concurrent.ConcurrentHashMap;
 

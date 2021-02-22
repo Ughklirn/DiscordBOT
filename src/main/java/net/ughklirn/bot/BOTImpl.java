@@ -1,4 +1,4 @@
-package net.ughklirn;
+package net.ughklirn.bot;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
@@ -6,9 +6,10 @@ import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.ughklirn.audio.PlayerManager;
-import net.ughklirn.listener.MessageListener;
+import net.ughklirn.listener.LogMessageListener;
 import net.ughklirn.listener.MusicListener;
 import net.ughklirn.listener.RolesListener;
+import net.ughklirn.utils.DiscordCred;
 
 import javax.security.auth.login.LoginException;
 import java.io.BufferedReader;
@@ -36,7 +37,7 @@ public class BOTImpl implements BOT {
 
     @Override
     public void run() {
-        jda.addEventListener(new MessageListener());
+        jda.addEventListener(new LogMessageListener());
         jda.addEventListener(new RolesListener(this.jda));
         jda.addEventListener(new MusicListener());
     }
@@ -59,7 +60,7 @@ public class BOTImpl implements BOT {
         List<String> lToken = new ArrayList<>();
 
         try {
-            fr = new FileReader("src/main/resources/key.txt");
+            fr = new FileReader(DiscordCred.BOT_PATH_KEY);
             br = new BufferedReader(fr);
             String game;
             while ((game = br.readLine()) != null) {

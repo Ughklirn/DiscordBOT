@@ -8,10 +8,10 @@ import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.managers.AudioManager;
-import net.ughklirn.BOTImpl;
-import net.ughklirn.DiscordCred;
 import net.ughklirn.audio.DiscordAudioLoadResultHandler;
 import net.ughklirn.audio.MusicController;
+import net.ughklirn.bot.BOTImpl;
+import net.ughklirn.utils.DiscordCred;
 
 public class MusicListener extends ListenerAdapter {
 

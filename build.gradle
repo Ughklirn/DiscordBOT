@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'bot.ughklirn'
+group 'net.ughklirn'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -20,62 +20,6 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     implementation 'net.dv8tion:JDA:4.2.0_227'
-    //implementation 'com.discord4j:discord4j-core:3.1.3'
-    // https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12
-    //testImplementation 'org.slf4j:slf4j-log4j12:2.0.0-alpha1'
-    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
-    //implementation 'org.slf4j:slf4j-api:2.0.0-alpha1'
-    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
-    //implementation 'org.apache.logging.log4j:log4j-core:2.14.0'
-    // https://mvnrepository.com/artifact/com.discord4j/discord-json-api
-    implementation group: 'com.discord4j', name: 'discord-json-api', version: '1.6.0'
-// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.1'
-// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.12.1'
-// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.12.1'
-// https://mvnrepository.com/artifact/com.discord4j/discord4j-core
-    implementation group: 'com.discord4j', name: 'discord4j-core', version: '3.2.0-M1'
-// https://mvnrepository.com/artifact/org.slf4j/slf4j-api
-    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.8.0-beta4'
-// https://mvnrepository.com/artifact/com.discord4j/stores-jdk
-    implementation group: 'com.discord4j', name: 'stores-jdk', version: '3.1.5'
-// https://mvnrepository.com/artifact/com.discord4j/stores-api
-    implementation group: 'com.discord4j', name: 'stores-api', version: '3.1.5'
-// https://mvnrepository.com/artifact/com.discord4j/discord-json
-    implementation group: 'com.discord4j', name: 'discord-json', version: '1.6.0'
-// https://mvnrepository.com/artifact/com.discord4j/discord-json-api
-    implementation group: 'com.discord4j', name: 'discord-json-api', version: '1.6.0'
-// https://mvnrepository.com/artifact/com.discord4j/discord4j-rest
-    implementation group: 'com.discord4j', name: 'discord4j-rest', version: '3.2.0-M1'
-// https://mvnrepository.com/artifact/com.discord4j/discord4j-common
-    implementation group: 'com.discord4j', name: 'discord4j-common', version: '3.2.0-M1'
-// https://mvnrepository.com/artifact/com.discord4j/discord4j-gateway
-    implementation group: 'com.discord4j', name: 'discord4j-gateway', version: '3.2.0-M1'
-    // https://mvnrepository.com/artifact/com.discord4j/discord4j-voice
-    implementation group: 'com.discord4j', name: 'discord4j-voice', version: '3.2.0-M1'
-// https://mvnrepository.com/artifact/io.projectreactor.addons/reactor-extra
-    implementation group: 'io.projectreactor.addons', name: 'reactor-extra', version: '3.4.2'
-// https://mvnrepository.com/artifact/io.projectreactor/reactor-core
-    implementation group: 'io.projectreactor', name: 'reactor-core', version: '3.4.2'
-// https://mvnrepository.com/artifact/org.reactivestreams/reactive-streams
-    implementation group: 'org.reactivestreams', name: 'reactive-streams', version: '1.0.3'
-// https://mvnrepository.com/artifact/com.discord4j/simple-fsm
-    implementation group: 'com.discord4j', name: 'simple-fsm', version: '1.0.1', ext: 'pom'
-// https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jdk8
-    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: '2.12.1'
-// https://mvnrepository.com/artifact/io.projectreactor.addons/reactor-extra
-    implementation group: 'io.projectreactor.addons', name: 'reactor-extra', version: '3.4.2'
-// https://mvnrepository.com/artifact/io.projectreactor/reactor-core
-    implementation group: 'io.projectreactor', name: 'reactor-core', version: '3.4.2'
-// https://mvnrepository.com/artifact/io.projectreactor.netty/reactor-netty
-    implementation group: 'io.projectreactor.netty', name: 'reactor-netty', version: '1.0.3'
-// https://mvnrepository.com/artifact/io.projectreactor.netty/reactor-netty-core
-    implementation group: 'io.projectreactor.netty', name: 'reactor-netty-core', version: '1.0.3'
-// https://mvnrepository.com/artifact/io.projectreactor.netty/reactor-netty-http
-    implementation group: 'io.projectreactor.netty', name: 'reactor-netty-http', version: '1.0.3'
-
     implementation 'com.sedmelluq:lavaplayer:1.3.71'
 }
 
@@ -83,26 +27,22 @@ test {
     useJUnitPlatform()
 }
 
-jar {
-    manifest {
-        attributes(
-                'Main-Class': 'net.ughklirn.Start'
-        )
-    }
-}
-tasks.named('test') {
-    // Use junit platform for unit tests.
-    useJUnitPlatform()
-}
-
-tasks.named('jar') {
-    manifest {
-        attributes('Implementation-Title': 'DiscordBOT',
-                'Implementation-Version': '1.0.0')
-    }
-}
-
-java {
-    // withJavadocJar()
-    withSourcesJar()
-}
+//jar {
+//    manifest {
+//        attributes(
+//                'Main-Class': 'net.ughklirn.Start'
+//        )
+//    }
+//    from {
+//        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+//    }
+//}
+//
+//task jarWithDependency(type: Jar) {
+//    manifest {
+//        attributes 'Main-Class': 'net.ughklirn.Start'
+//    }
+//    from {
+//        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+//    } with jar
+//}
