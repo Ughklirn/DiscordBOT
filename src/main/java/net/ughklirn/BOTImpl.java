@@ -1,36 +1,84 @@
 package net.ughklirn;
 
-import discord4j.core.DiscordClient;
-import discord4j.core.GatewayDiscordClient;
-import discord4j.core.object.entity.Guild;
-import discord4j.core.object.entity.User;
-import discord4j.core.object.presence.Presence;
-import reactor.core.publisher.Flux;
+import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
+import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
+import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
+import net.ughklirn.audio.PlayerManager;
+import net.ughklirn.listener.MessageListener;
+import net.ughklirn.listener.MusicListener;
+import net.ughklirn.listener.RolesListener;
+
+import javax.security.auth.login.LoginException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BOTImpl implements BOT {
-    private final DiscordClient client;
-    private GatewayDiscordClient gateway;
+    private JDA jda;
+    private AudioPlayerManager apm;
+    private PlayerManager pm;
+    public static BOT INSTANCE;
+    //private final GatewayDiscordClient client = DiscordClientBuilder.create(DiscordCred.BOT_TOKEN).build().login().block();
+    //private static final Map<String, Commands> commands = new HashMap<>();
 
-    public BOTImpl() {
-        this.client = DiscordClient.create(DiscordCred.BOT_TOKEN);
+    public BOTImpl() throws LoginException {
+        INSTANCE = this;
+        this.jda = JDABuilder.createDefault(this.readToken()).build();
+        this.apm = new DefaultAudioPlayerManager();
+        this.pm = new PlayerManager();
+        AudioSourceManagers.registerRemoteSources(this.apm);
+        this.apm.getConfiguration().setFilterHotSwapEnabled(true);
     }
 
-    public void log_in() {
-        this.gateway = this.client.login().block();
-        this.gateway.updatePresence(Presence.online()).block();
+    @Override
+    public void run() {
+        jda.addEventListener(new MessageListener());
+        jda.addEventListener(new RolesListener(this.jda));
+        jda.addEventListener(new MusicListener());
     }
 
-    public void log_off() {
-        this.gateway.logout().block();
+    public AudioPlayerManager getAudioPlayerManager() {
+        return apm;
     }
 
-    public void getGuilds() {
-        Flux<Guild> guilds = this.gateway.getGuilds();
-        System.out.println(guilds);
+    public JDA getJDA() {
+        return jda;
     }
 
-    public void getUsers() {
-        Flux<User> users = this.gateway.getUsers();
-        System.out.println(users);
+    public PlayerManager getPlayerManager() {
+        return this.pm;
+    }
+
+    private String readToken() {
+        BufferedReader br = null;
+        FileReader fr = null;
+        List<String> lToken = new ArrayList<>();
+
+        try {
+            fr = new FileReader("src/main/resources/key.txt");
+            br = new BufferedReader(fr);
+            String game;
+            while ((game = br.readLine()) != null) {
+                lToken.add(game);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (br != null) {
+                    br.close();
+                }
+                if (fr != null) {
+                    fr.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return lToken.get(0);
+        }
     }
 }
