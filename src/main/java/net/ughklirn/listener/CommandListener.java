@@ -15,19 +15,31 @@ public class CommandListener extends ListenerAdapter {
             if (event.getMessage().getContentDisplay().startsWith(DiscordCred.BOT_CMD_PREFIX)) {
                 switch (msg[0]) {
                     case DiscordCred.BOT_CMD_PREFIX + DiscordCred.BOT_CMD_MUSIC_PLAY:
-                        MusicEvent.play(event, msg);
+                        MusicEvent.play(event);
                         break;
                     case DiscordCred.BOT_CMD_PREFIX + DiscordCred.BOT_CMD_MUSIC_STOP:
-                        MusicEvent.stop(event, msg);
+                        MusicEvent.stop(event);
+                        break;
+                    case DiscordCred.BOT_CMD_PREFIX + DiscordCred.BOT_CMD_MUSIC_VOLUME:
+                        MusicEvent.volume(event);
                         break;
                     case DiscordCred.BOT_CMD_PREFIX + DiscordCred.BOT_CMD_ROLE_JOIN:
-                        RolesEvent.join(event, msg);
+                        RolesEvent.join(event);
                         break;
                     case DiscordCred.BOT_CMD_PREFIX + DiscordCred.BOT_CMD_ROLE_LEAVE:
-                        RolesEvent.leave(event, msg);
+                        RolesEvent.leave(event);
                         break;
                     case DiscordCred.BOT_CMD_PREFIX + DiscordCred.BOT_CMD_TEST:
                         RolesEvent.test(event);
+                        break;
+                    case DiscordCred.BOT_CMD_PREFIX + DiscordCred.BOT_CMD_CONFIG_SAVE:
+                        PersistenceEvent.save(event);
+                        break;
+                    case DiscordCred.BOT_CMD_PREFIX + DiscordCred.BOT_CMD_CONFIG_LOAD:
+                        PersistenceEvent.load(event);
+                        break;
+                    case DiscordCred.BOT_CMD_PREFIX + DiscordCred.BOT_CMD_SHUTDOWN:
+                        AdminEvent.shutdown(event);
                         break;
                     default:
                         break;

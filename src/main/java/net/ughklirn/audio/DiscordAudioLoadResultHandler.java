@@ -16,11 +16,13 @@ public class DiscordAudioLoadResultHandler implements AudioLoadResultHandler {
 
     @Override
     public void trackLoaded(AudioTrack track) {
+        this.controller.reload();
         this.controller.getPlayer().playTrack(track);
     }
 
     @Override
     public void playlistLoaded(AudioPlaylist playlist) {
+        this.controller.reload();
         for (AudioTrack track : playlist.getTracks()) {
             this.controller.getPlayer().playTrack(track);
         }

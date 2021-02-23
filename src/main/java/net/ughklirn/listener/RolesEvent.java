@@ -2,12 +2,9 @@ package net.ughklirn.listener;
 
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.ughklirn.utils.DiscordCred;
+import net.ughklirn.utils.Config;
+import net.ughklirn.utils.RoleType;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class RolesEvent {
@@ -44,7 +41,8 @@ public class RolesEvent {
 //        }
 //    }
 
-    public static void join(MessageReceivedEvent event, String[] msg) {
+    public static void join(MessageReceivedEvent event) {
+        String[] msg = event.getMessage().getContentDisplay().split(" ");
         readLists();
         String role_name = msg[1];
         if (lRoleGames.contains(role_name)) {
@@ -52,28 +50,29 @@ public class RolesEvent {
             event.getGuild().addRoleToMember(event.getMember(), role).queue();
             System.out.println("Added " + event.getAuthor() + " to " + role + ".");
             event.getChannel().sendMessage(event.getAuthor().getName() + " wurde zur Gruppe " + role.getName() + " hinzugefügt.").queue();
-            event.getGuild().getTextChannelById(DiscordCred.BOT_TCHANNEL_BOT_LOG_ID).sendMessage(event.getAuthor().getName() + " wurde zur Gruppe " + role.getName() + " hinzugefügt.").queue();
+//            event.getGuild().getTextChannelById(DiscordCred.BOT_TCHANNEL_BOT_LOG_ID).sendMessage(event.getAuthor().getName() + " wurde zur Gruppe " + role.getName() + " hinzugefügt.").queue();
         } else if (lRoleClans.contains(role_name)) {
             leaveAllClans(event);
             Role role = event.getGuild().getRoleById(event.getGuild().getRolesByName(role_name, false).get(0).getId());
             event.getGuild().addRoleToMember(event.getMember(), role).queue();
             System.out.println("Added " + event.getAuthor() + " to " + role + ".");
             event.getChannel().sendMessage(event.getAuthor().getName() + " wurde zur Gruppe " + role.getName() + " hinzugefügt.").queue();
-            event.getGuild().getTextChannelById(DiscordCred.BOT_TCHANNEL_BOT_LOG_ID).sendMessage(event.getAuthor().getName() + " wurde zur Gruppe " + role.getName() + " hinzugefügt.").queue();
+//            event.getGuild().getTextChannelById(DiscordCred.BOT_TCHANNEL_BOT_LOG_ID).sendMessage(event.getAuthor().getName() + " wurde zur Gruppe " + role.getName() + " hinzugefügt.").queue();
         } else {
             event.getChannel().sendMessage(role_name + " ist keine gültige Gruppe.").queue();
-            event.getGuild().getTextChannelById(DiscordCred.BOT_TCHANNEL_BOT_LOG_ID).sendMessage(event.getAuthor().getName() + ": " + role_name + " ist keine gültige Gruppe.").queue();
+//            event.getGuild().getTextChannelById(DiscordCred.BOT_TCHANNEL_BOT_LOG_ID).sendMessage(event.getAuthor().getName() + ": " + role_name + " ist keine gültige Gruppe.").queue();
         }
     }
 
-    public static void leave(MessageReceivedEvent event, String[] msg) {
+    public static void leave(MessageReceivedEvent event) {
+        String[] msg = event.getMessage().getContentDisplay().split(" ");
         readLists();
         String role_name = msg[1];
         if ((lRoleGames.contains(role_name)) || lRoleClans.contains(role_name)) {
             Role role = event.getGuild().getRoleById(event.getGuild().getRolesByName(role_name, false).get(0).getId());
             event.getGuild().removeRoleFromMember(event.getMember(), role).queue();
             System.out.println("Remove " + event.getAuthor() + " from " + role + ".");
-            event.getChannel().sendMessage(event.getAuthor().getName() + " wurde aus der Gruppe " + role.getName() + " entfernt.").queue();
+//            event.getChannel().sendMessage(event.getAuthor().getName() + " wurde aus der Gruppe " + role.getName() + " entfernt.").queue();
         }
     }
 
@@ -97,39 +96,41 @@ public class RolesEvent {
     }
 
     private static void readLists() {
-        BufferedReader br = null;
-        FileReader fr = null;
-        lRoleGames = new ArrayList<>();
-        lRoleClans = new ArrayList<>();
-
-        try {
-            fr = new FileReader(DiscordCred.BOT_PATH_GAMES);
-            br = new BufferedReader(fr);
-            String game;
-            while ((game = br.readLine()) != null) {
-                lRoleGames.add(game);
-            }
-
-            fr = new FileReader(DiscordCred.BOT_PATH_CLAN);
-            br = new BufferedReader(fr);
-            String clan;
-            while ((clan = br.readLine()) != null) {
-                lRoleClans.add(clan);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (br != null) {
-                    br.close();
-                }
-                if (fr != null) {
-                    fr.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        lRoleClans = Config.getInstance().getTextChannels_Commands_Roles().get(RoleType.CLANS);
+        lRoleGames = Config.getInstance().getTextChannels_Commands_Roles().get(RoleType.GAMES);
+//        BufferedReader br = null;
+//        FileReader fr = null;
+//        lRoleGames = new ArrayList<>();
+//        lRoleClans = new ArrayList<>();
+//
+//        try {
+//            fr = new FileReader(DiscordCred.BOT_PATH_GAMES);
+//            br = new BufferedReader(fr);
+//            String game;
+//            while ((game = br.readLine()) != null) {
+//                lRoleGames.add(game);
+//            }
+//
+//            fr = new FileReader(DiscordCred.BOT_PATH_CLAN);
+//            br = new BufferedReader(fr);
+//            String clan;
+//            while ((clan = br.readLine()) != null) {
+//                lRoleClans.add(clan);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                if (br != null) {
+//                    br.close();
+//                }
+//                if (fr != null) {
+//                    fr.close();
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     private static void leaveAllClans(MessageReceivedEvent event) {

@@ -3,7 +3,7 @@ package net.ughklirn.audio;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import net.dv8tion.jda.api.entities.Guild;
 import net.ughklirn.bot.BOTImpl;
-import net.ughklirn.utils.DiscordCred;
+import net.ughklirn.utils.Config;
 
 public class MusicController {
     private Guild guild;
@@ -13,7 +13,12 @@ public class MusicController {
         this.guild = guild;
         this.player = BOTImpl.INSTANCE.getAudioPlayerManager().createPlayer();
         this.guild.getAudioManager().setSendingHandler(new AudioPlayerSendHandler(this.player));
-        this.player.setVolume(DiscordCred.BOT_SETTINGS_MUSIC_VOLUME);
+        if (Config.getInstance().getTextChannel_Music_Volume().get(guild) != null) {
+            this.player.setVolume(Config.getInstance().getTextChannel_Music_Volume().get(guild));
+        } else {
+            Config.getInstance().setVolume(guild, Config.getInstance().getBotMusic_Volume());
+            this.player.setVolume(Config.getInstance().getTextChannel_Music_Volume().get(guild));
+        }
     }
 
     public Guild getGuild() {
@@ -22,5 +27,9 @@ public class MusicController {
 
     public AudioPlayer getPlayer() {
         return player;
+    }
+
+    public void reload() {
+        this.player.setVolume(Config.getInstance().getTextChannel_Music_Volume().get(guild));
     }
 }

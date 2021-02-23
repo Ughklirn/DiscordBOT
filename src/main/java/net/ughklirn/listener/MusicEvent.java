@@ -9,48 +9,38 @@ import net.dv8tion.jda.api.managers.AudioManager;
 import net.ughklirn.audio.DiscordAudioLoadResultHandler;
 import net.ughklirn.audio.MusicController;
 import net.ughklirn.bot.BOTImpl;
+import net.ughklirn.utils.Config;
 import net.ughklirn.utils.DiscordCred;
 
+import java.util.List;
+
 public class MusicEvent {
+    private static List<String> lTextChannel;
 
-//    public void onMessageReceived(MessageReceivedEvent event) {
-//        String[] args = event.getMessage().getContentDisplay().split(" ");
-//        boolean isRightChannel = (event.getChannel().getId().equals(DiscordCred.BOT_TCHANNEL_MUSIC_ID)) || (event.getChannel().getId().equals(DiscordCred.BOT_TCHANNEL_MUSIC_TEAM_ID));
-//        if (event.isFromType(ChannelType.TEXT)) {
-//            if (isRightChannel) {
-//                if (event.getMessage().getContentDisplay().startsWith(DiscordCred.BOT_CMD_PREFIX)) {
-//                    switch (args[0]) {
-//                        case DiscordCred.BOT_CMD_PREFIX + DiscordCred.BOT_CMD_MUSIC_PLAY:
-//                            this.play(event, args);
-//                            break;
-//                        case DiscordCred.BOT_CMD_PREFIX + DiscordCred.BOT_CMD_MUSIC_STOP:
-//                            this.stop(event, args);
-//                            break;
-//                        default:
-//                            break;
-//                    }
-//                }
-//            }
+    public static void play(MessageReceivedEvent event) {
+        String[] msg = event.getMessage().getContentDisplay().split(" ");
+//
+//        try {
+//            Config.getInstance().getTextChannel_Music_Volume().get(event.getMember().getGuild());
+//        } catch (Exception e) {
+//            Config.getInstance().getTextChannel_Music_Volume().put(event.getMember().getGuild(), Config.getInstance().getBotMusic_Volume());
 //        }
-//    }
 
-    public static void play(MessageReceivedEvent event, String[] args) {
-        boolean isRightChannel = (event.getChannel().getId().equals(DiscordCred.BOT_TCHANNEL_MUSIC_ID)) || (event.getChannel().getId().equals(DiscordCred.BOT_TCHANNEL_MUSIC_TEAM_ID));
-        if (isRightChannel) {
+        if (Config.getInstance().getTextChannels_Commands_Music().contains(event.getChannel().getId())) {
             GuildVoiceState state;
             if ((state = event.getMember().getVoiceState()) != null) {
                 VoiceChannel vc;
                 if ((vc = state.getChannel()) != null) {
                     MusicController mc = BOTImpl.INSTANCE.getPlayerManager().getController(vc.getGuild().getIdLong());
-                    AudioPlayer player = mc.getPlayer();
+//                    AudioPlayer player = mc.getPlayer();
                     AudioPlayerManager apm = BOTImpl.INSTANCE.getAudioPlayerManager();
                     AudioManager manager = vc.getGuild().getAudioManager();
                     manager.openAudioConnection(vc);
 
                     StringBuilder sb = new StringBuilder();
 
-                    for (int i = 1; i < args.length; i++) {
-                        sb.append(args[i] + " ");
+                    for (int i = 1; i < msg.length; i++) {
+                        sb.append(msg[i] + " ");
                     }
 
                     String url = sb.toString().trim();
@@ -60,58 +50,73 @@ public class MusicEvent {
 
                     final String uri = url;
                     apm.loadItem(uri, new DiscordAudioLoadResultHandler(uri, mc));
-                    event.getMessage().addReaction(DiscordCred.BOT_REACTION_MUSIC_OK).queue();
+                    event.getMessage().addReaction(DiscordCred.BOT_REACTION_OK).queue();
                 }
             }
         }
     }
 
-    public static void stop(MessageReceivedEvent event, String[] args) {
-        boolean isRightChannel = (event.getChannel().getId().equals(DiscordCred.BOT_TCHANNEL_MUSIC_ID)) || (event.getChannel().getId().equals(DiscordCred.BOT_TCHANNEL_MUSIC_TEAM_ID));
-        if (isRightChannel) {
+    public static void stop(MessageReceivedEvent event) {
+        if (Config.getInstance().getTextChannels_Commands_Music().contains(event.getChannel().getId())) {
             GuildVoiceState state;
             if ((state = event.getMember().getVoiceState()) != null) {
                 VoiceChannel vc;
                 if ((vc = state.getChannel()) != null) {
                     MusicController mc = BOTImpl.INSTANCE.getPlayerManager().getController(vc.getGuild().getIdLong());
+                    mc.reload();
                     AudioPlayer player = mc.getPlayer();
-                    AudioPlayerManager apm = BOTImpl.INSTANCE.getAudioPlayerManager();
+//                    AudioPlayerManager apm = BOTImpl.INSTANCE.getAudioPlayerManager();
                     AudioManager manager = vc.getGuild().getAudioManager();
                     player.stopTrack();
                     manager.closeAudioConnection();
-                    event.getMessage().addReaction(DiscordCred.BOT_REACTION_MUSIC_OK).queue();
+                    event.getMessage().addReaction(DiscordCred.BOT_REACTION_OK).queue();
                 }
             }
         }
     }
 
+    public static void volume(MessageReceivedEvent event) {
+        String[] msg = event.getMessage().getContentDisplay().split(" ");
+        if (Config.getInstance().getTextChannels_Commands_Music().contains(event.getChannel().getId())) {
+            Config.getInstance().setVolume(event.getMember().getGuild(), Integer.parseInt(msg[1]));
+//            System.out.println("Volume: " + msg[1]);
+            event.getMessage().addReaction(DiscordCred.BOT_REACTION_OK).queue();
+            BOTImpl.INSTANCE.getPlayerManager().getController(event.getMember().getGuild().getIdLong()).reload();
+        }
+    }
 
-//    // Note that we are using GuildMessageReceivedEvent to only include messages from a Guild!
-//    @Override
-//    public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-//        boolean isRightChannel = (event.getChannel().getId().equals(DiscordCred.BOT_TCHANNEL_MUSIC_ID)) || (event.getChannel().getId().equals(DiscordCred.BOT_TCHANNEL_MUSIC_TEAM_ID));
+
+//    private static boolean checkChannelID(MessageReceivedEvent event) {
+//        BufferedReader br = null;
+//        FileReader fr = null;
+//        lTextChannel = new ArrayList<>();
 //
-//        AudioPlayerManager playerManager = new DefaultAudioPlayerManager();
-//        AudioSourceManagers.registerRemoteSources(playerManager);
-//        AudioPlayer player = playerManager.createPlayer();
-//        TrackScheduler trackScheduler = new TrackScheduler();
-//        player.addListener(trackScheduler);
-//        // This makes sure we only execute our code when someone sends a message with "!play"
-//        if (!event.getMessage().getContentRaw().startsWith("!play")) return;
-//        // Now we want to exclude messages from bots since we want to avoid command loops in chat!
-//        // this will include own messages as well for bot accounts
-//        // if this is not a bot make sure to check if this message is sent by yourself!
-//        if (event.getAuthor().isBot()) return;
-//        Guild guild = event.getGuild();
-//        // This will get the first voice channel with the name "music"
-//        // matching by voiceChannel.getName().equalsIgnoreCase("music")
-//        VoiceChannel channel = guild.getVoiceChannelsByName("music", true).get(0);
-//        AudioManager manager = guild.getAudioManager();
-//
-//        // MySendHandler should be your AudioSendHandler implementation
-//        manager.setSendingHandler(new AudioPlayerSendHandler(null));
-//        // Here we finally connect to the target voice channel
-//        // and it will automatically start pulling the audio from the MySendHandler instance
-//        manager.openAudioConnection(channel);
+//        try {
+//            fr = new FileReader(DiscordCred.BOT_PATH_CHANNELS_TEXT_MUSIC);
+//            br = new BufferedReader(fr);
+//            String game;
+//            while ((game = br.readLine()) != null) {
+//                lTextChannel.add(game);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                if (br != null) {
+//                    br.close();
+//                }
+//                if (fr != null) {
+//                    fr.close();
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            for (String k : lTextChannel) {
+//                if (event.getChannel().getId().equals(k)) {
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
 //    }
 }
