@@ -4,6 +4,8 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.ughklirn.utils.Config;
 import net.ughklirn.utils.DiscordCred;
 
+import java.io.FileNotFoundException;
+
 public class PersistenceEvent {
     public static void save(MessageReceivedEvent event) {
         if (Config.getInstance().getTextChannels_Commands_Admins().contains(event.getChannel().getId())) {
@@ -22,7 +24,11 @@ public class PersistenceEvent {
     public static void load(MessageReceivedEvent event) {
         if (Config.getInstance().getTextChannels_Commands_Admins().contains(event.getChannel().getId())) {
             event.getMessage().addReaction(DiscordCred.BOT_REACTION_ACCEPT).queue();
-            Config.getInstance().load();
+            try {
+                Config.getInstance().load();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         } else {
             event.getMessage().addReaction(DiscordCred.BOT_REACTION_ERROR).queue();
             System.out.println(event.getChannel().getId());

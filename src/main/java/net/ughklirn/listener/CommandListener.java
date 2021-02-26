@@ -23,6 +23,18 @@ public class CommandListener extends ListenerAdapter {
                     case DiscordCred.BOT_CMD_PREFIX + DiscordCred.BOT_CMD_MUSIC_VOLUME:
                         MusicEvent.volume(event);
                         break;
+                    case DiscordCred.BOT_CMD_PREFIX + DiscordCred.BOT_CMD_MUSIC_REPEAT:
+                        MusicEvent.repeat(event);
+                        break;
+                    case DiscordCred.BOT_CMD_PREFIX + DiscordCred.BOT_CMD_MUSIC_REPEATS:
+                        MusicEvent.repeatAll(event);
+                        break;
+                    case DiscordCred.BOT_CMD_PREFIX + DiscordCred.BOT_CMD_MUSIC_REPEAT_ALL:
+                        MusicEvent.repeatAll(event);
+                        break;
+                    case DiscordCred.BOT_CMD_PREFIX + DiscordCred.BOT_CMD_MUSIC_PAUSE:
+                        MusicEvent.pause(event);
+                        break;
                     case DiscordCred.BOT_CMD_PREFIX + DiscordCred.BOT_CMD_ROLE_JOIN:
                         RolesEvent.join(event);
                         break;

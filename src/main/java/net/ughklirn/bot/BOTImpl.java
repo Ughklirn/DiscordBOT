@@ -9,15 +9,10 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.ughklirn.audio.PlayerManager;
 import net.ughklirn.listener.CommandListener;
 import net.ughklirn.utils.Config;
-import net.ughklirn.utils.DiscordCred;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.security.auth.login.LoginException;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BOTImpl implements BOT {
@@ -31,18 +26,18 @@ public class BOTImpl implements BOT {
     //private static final Map<String, Commands> commands = new HashMap<>();
 
     public BOTImpl() throws LoginException {
-        this.jda = JDABuilder.createDefault(this.readToken()).build();
+        this.config = Config.getInstance();
+        this.jda = JDABuilder.createDefault(Config.getInstance().getBotToken()).build();
         INSTANCE = this;
         this.apm = new DefaultAudioPlayerManager();
         this.pm = new PlayerManager();
         AudioSourceManagers.registerRemoteSources(this.apm);
         this.apm.getConfiguration().setFilterHotSwapEnabled(true);
-        this.config = Config.getInstance();
     }
 
     @Override
     public void run() {
-        jda.addEventListener(new CommandListener());
+        this.jda.addEventListener(new CommandListener());
     }
 
     public AudioPlayerManager getAudioPlayerManager() {
@@ -64,33 +59,33 @@ public class BOTImpl implements BOT {
     public List<Guild> getGuilds() {
         return this.jda.getGuilds();
     }
-
-    private String readToken() {
-        BufferedReader br = null;
-        FileReader fr = null;
-        List<String> lToken = new ArrayList<>();
-
-        try {
-            fr = new FileReader(DiscordCred.BOT_PATH_KEY);
-            br = new BufferedReader(fr);
-            String game;
-            while ((game = br.readLine()) != null) {
-                lToken.add(game);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (br != null) {
-                    br.close();
-                }
-                if (fr != null) {
-                    fr.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return lToken.get(0);
-        }
-    }
+//
+//    private String readToken() {
+//        BufferedReader br = null;
+//        FileReader fr = null;
+//        List<String> lToken = new ArrayList<>();
+//
+//        try {
+//            fr = new FileReader(DiscordCred.BOT_PATH_KEY);
+//            br = new BufferedReader(fr);
+//            String game;
+//            while ((game = br.readLine()) != null) {
+//                lToken.add(game);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                if (br != null) {
+//                    br.close();
+//                }
+//                if (fr != null) {
+//                    fr.close();
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            return lToken.get(0);
+//        }
+//    }
 }

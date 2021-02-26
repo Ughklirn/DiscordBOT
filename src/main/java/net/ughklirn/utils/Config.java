@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 
 import java.io.*;
+import java.security.CodeSource;
 import java.util.*;
 
 public class Config {
@@ -21,6 +22,7 @@ public class Config {
     private File file;
 
     private Config() {
+        this.file = new File("config.json");
         this.INSTANCE = this;
         this.botToken = this.readToken();
         this.botMusic_Volume = 100;
@@ -31,8 +33,24 @@ public class Config {
         this.lTextChannel_Commands_AutoVoiceChannel = new LinkedList<>();
         this.mTextChannel_Commands_Roles = new LinkedHashMap<>();
         this.mTextChannel_Commands_Music_Volume = new HashMap<>();
-        this.file = new File("config.json");
         this.readFiles();
+        System.out.println("Create :/");
+        if (!file.exists()) {
+            this.save();
+        }
+    }
+
+    public Config(Config c) {
+        c.botToken = botToken;
+        c.botMusic_Volume = botMusic_Volume;
+        c.lTextChannel_Commands_Admins = lTextChannel_Commands_Admins;
+        c.lTextChannel_Commands_Moderation = lTextChannel_Commands_Moderation;
+        c.lTextChannel_Commands_Users = lTextChannel_Commands_Users;
+        c.lTextChannel_Commands_Music = lTextChannel_Commands_Music;
+        c.lTextChannel_Commands_AutoVoiceChannel = lTextChannel_Commands_AutoVoiceChannel;
+        c.mTextChannel_Commands_Roles = mTextChannel_Commands_Roles;
+        c.mTextChannel_Commands_Music_Volume = mTextChannel_Commands_Music_Volume;
+        c.file = file;
     }
 
     public static Config getInstance() {
@@ -64,17 +82,14 @@ public class Config {
         }
     }
 
-    public void load() {
-        try {
-            if (!file.exists()) {
-                System.err.println("No File!");
-            }
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-            INSTANCE = (Config) gson.fromJson(br, Config.class);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+    public Config load() throws FileNotFoundException {
+        if (!file.exists()) {
+            System.err.println("No File!");
         }
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+        INSTANCE = (Config) gson.fromJson(br, Config.class);
+        return INSTANCE;
     }
 
     public int getBotMusic_Volume() {
@@ -146,12 +161,15 @@ public class Config {
     }
 
     private String readToken() {
+        if (file.exists()) {
+
+        }
         BufferedReader br = null;
         FileReader fr = null;
         List<String> lToken = new ArrayList<>();
 
         try {
-            fr = new FileReader(DiscordCred.BOT_PATH_KEY);
+            fr = new FileReader(this.getJarPathWithoutJar() + DiscordCred.BOT_PATH_KEY);
             br = new BufferedReader(fr);
             String game;
             while ((game = br.readLine()) != null) {
@@ -187,7 +205,7 @@ public class Config {
              * Roles: Games
              */
 
-            fr = new FileReader(DiscordCred.BOT_PATH_GAMES);
+            fr = new FileReader(this.getJarPathWithoutJar() + DiscordCred.BOT_PATH_GAMES);
             br = new BufferedReader(fr);
             String game;
             while ((game = br.readLine()) != null) {
@@ -198,7 +216,7 @@ public class Config {
              * Roles: Clans
              */
 
-            fr = new FileReader(DiscordCred.BOT_PATH_CLAN);
+            fr = new FileReader(this.getJarPathWithoutJar() + DiscordCred.BOT_PATH_CLAN);
             br = new BufferedReader(fr);
             String clan;
             while ((clan = br.readLine()) != null) {
@@ -209,7 +227,7 @@ public class Config {
              * tChannel: Music
              */
 
-            fr = new FileReader(DiscordCred.BOT_PATH_CHANNELS_TEXT_MUSIC);
+            fr = new FileReader(this.getJarPathWithoutJar() + DiscordCred.BOT_PATH_CHANNELS_TEXT_MUSIC);
             br = new BufferedReader(fr);
             String music;
             while ((music = br.readLine()) != null) {
@@ -221,7 +239,7 @@ public class Config {
              * tChannel: Admin
              */
 
-            fr = new FileReader(DiscordCred.BOT_PATH_CHANNELS_TEXT_ADMIN);
+            fr = new FileReader(this.getJarPathWithoutJar() + DiscordCred.BOT_PATH_CHANNELS_TEXT_ADMIN);
             br = new BufferedReader(fr);
             String admin;
             while ((admin = br.readLine()) != null) {
@@ -243,4 +261,41 @@ public class Config {
             }
         }
     }
+
+    private Config loadMe() throws FileNotFoundException {
+        File file = new File(this.getJarPathWithoutJar() + "/config.json");
+        if (!file.exists()) {
+            System.err.println("No File!");
+        }
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+        return gson.fromJson(br, Config.class);
+    }
+
+    //gibt den Pfad dieser Jar-Datei zurück
+    private String getCurrentJarPath() {
+        String path = getJarPath();
+        if (path.endsWith(".jar")) {
+            return path.substring(0, path.lastIndexOf("/"));
+        }
+        return path;
+    }
+
+    //gibt den absoluten Pfad inklusive Dateiname dieser Anwendung zurück
+    private String getJarPath() {
+        final CodeSource source = this.getClass().getProtectionDomain().getCodeSource();
+        if (source != null) {
+            return source.getLocation().getPath().replaceAll("%20", " ");
+        }
+        return null;
+    }
+
+    private String getJarPathWithoutJar() {
+        final CodeSource source = this.getClass().getProtectionDomain().getCodeSource();
+        if (source != null) {
+            return source.getLocation().getPath().replaceAll("%20", " ").replace("DiscordBOT.jar", "").replace("build/classes/java/main", "");
+        }
+        return null;
+    }
+
 }

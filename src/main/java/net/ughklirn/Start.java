@@ -13,8 +13,12 @@ public class Start {
     private ShardManager sm;
 
     public static void main(String[] args) throws LoginException {
-        BOT bot = new BOTImpl();
-        Thread t1 = new Thread(bot);
-        t1.run();
+        try {
+            BOT bot = new BOTImpl();
+            Thread t1 = new Thread(bot);
+            t1.run();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

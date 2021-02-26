@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.managers.AudioManager;
+import net.ughklirn.audio.AudioTrackClone;
 import net.ughklirn.audio.DiscordAudioLoadResultHandler;
 import net.ughklirn.audio.MusicController;
 import net.ughklirn.bot.BOTImpl;
@@ -16,6 +17,7 @@ import java.util.List;
 
 public class MusicEvent {
     private static List<String> lTextChannel;
+    private static DiscordAudioLoadResultHandler alrh;
 
     public static void play(MessageReceivedEvent event) {
         String[] msg = event.getMessage().getContentDisplay().split(" ");
@@ -32,25 +34,37 @@ public class MusicEvent {
                 VoiceChannel vc;
                 if ((vc = state.getChannel()) != null) {
                     MusicController mc = BOTImpl.INSTANCE.getPlayerManager().getController(vc.getGuild().getIdLong());
-//                    AudioPlayer player = mc.getPlayer();
+                    AudioPlayer player = mc.getPlayer();
                     AudioPlayerManager apm = BOTImpl.INSTANCE.getAudioPlayerManager();
                     AudioManager manager = vc.getGuild().getAudioManager();
-                    manager.openAudioConnection(vc);
+                    StringBuffer sb_msg = new StringBuffer();
+                    if (event.getMessage().getContentDisplay().equals(DiscordCred.BOT_CMD_PREFIX + DiscordCred.BOT_CMD_MUSIC_PLAY)) {
+                        player.setPaused(false);
+                    } else {
+                        manager.openAudioConnection(vc);
 
-                    StringBuilder sb = new StringBuilder();
+                        StringBuffer sb = new StringBuffer();
 
-                    for (int i = 1; i < msg.length; i++) {
-                        sb.append(msg[i] + " ");
+                        for (int i = 1; i < msg.length; i++) {
+                            sb.append(msg[i] + " ");
+                        }
+
+                        String url = sb.toString().trim();
+                        url = url.replace("<", "");
+                        url = url.replace(">", "");
+                        if (!url.startsWith("http")) {
+                            url = "ytsearch: " + url;
+                        }
+
+                        final String uri = url;
+                        //sb_msg.append("**URL:** <" + uri + ">");
+                        alrh = new DiscordAudioLoadResultHandler(uri, mc);
+                        apm.loadItem(uri, alrh);
                     }
-
-                    String url = sb.toString().trim();
-                    if (!url.startsWith("http")) {
-                        url = "ytsearch: " + url;
-                    }
-
-                    final String uri = url;
-                    apm.loadItem(uri, new DiscordAudioLoadResultHandler(uri, mc));
-                    event.getMessage().addReaction(DiscordCred.BOT_REACTION_OK).queue();
+                    event.getMessage().addReaction(DiscordCred.BOT_REACTION_MUSIC_PLAY).queue();
+                    sb_msg.append(AudioTrackClone.getTrackInfo());
+                    event.getChannel().sendMessage(sb_msg.toString()).queue();
+//                    event.getChannel().sendMessage("Ok").queue();
                 }
             }
         }
@@ -69,7 +83,7 @@ public class MusicEvent {
                     AudioManager manager = vc.getGuild().getAudioManager();
                     player.stopTrack();
                     manager.closeAudioConnection();
-                    event.getMessage().addReaction(DiscordCred.BOT_REACTION_OK).queue();
+                    event.getMessage().addReaction(DiscordCred.BOT_REACTION_MUSIC_STOP).queue();
                 }
             }
         }
@@ -80,9 +94,59 @@ public class MusicEvent {
         if (Config.getInstance().getTextChannels_Commands_Music().contains(event.getChannel().getId())) {
             Config.getInstance().setVolume(event.getMember().getGuild(), Integer.parseInt(msg[1]));
 //            System.out.println("Volume: " + msg[1]);
-            event.getMessage().addReaction(DiscordCred.BOT_REACTION_OK).queue();
+            event.getMessage().addReaction(DiscordCred.BOT_REACTION_MUSIC_VOLUME).queue();
             BOTImpl.INSTANCE.getPlayerManager().getController(event.getMember().getGuild().getIdLong()).reload();
         }
+    }
+
+    public static void repeat(MessageReceivedEvent event) {
+        if (Config.getInstance().getTextChannels_Commands_Music().contains(event.getChannel().getId())) {
+            boolean repeat = alrh.changeRepeatAll();
+//            System.out.println("Volume: " + msg[1]);
+            event.getMessage().addReaction(DiscordCred.BOT_REACTION_OK).queue();
+            event.getMessage().addReaction(DiscordCred.BOT_REACTION_MUSIC_REPEAT_ONE).queue();
+            checkRepeat(event);
+        }
+    }
+
+    public static void repeatAll(MessageReceivedEvent event) {
+        if (Config.getInstance().getTextChannels_Commands_Music().contains(event.getChannel().getId())) {
+            boolean repeat = alrh.changeRepeatAll();
+//            System.out.println("Volume: " + msg[1]);
+            event.getMessage().addReaction(DiscordCred.BOT_REACTION_OK).queue();
+            event.getMessage().addReaction(DiscordCred.BOT_REACTION_MUSIC_REPEAT_ALL).queue();
+            checkRepeat(event);
+        }
+    }
+
+    public static void pause(MessageReceivedEvent event) {
+        if (Config.getInstance().getTextChannels_Commands_Music().contains(event.getChannel().getId())) {
+            BOTImpl.INSTANCE.getPlayerManager().getController(event.getGuild().getIdLong()).getPlayer().setPaused(true);
+            event.getMessage().addReaction(DiscordCred.BOT_REACTION_MUSIC_PAUSE).queue();
+        }
+    }
+
+    public static void info(MessageReceivedEvent event) {
+        if (Config.getInstance().getTextChannels_Commands_Music().contains(event.getChannel().getId())) {
+            event.getMessage().addReaction(DiscordCred.BOT_REACTION_MUSIC_PAUSE).queue();
+        }
+    }
+
+    private static void checkRepeat(MessageReceivedEvent event) {
+        StringBuffer sb = new StringBuffer();
+        if (alrh.isRepeatAll()) {
+            sb.append("**repeat all**: on");
+        } else {
+            sb.append("**repeat all**: off");
+        }
+        sb.append("\n");
+        if (alrh.isRepeatTrack()) {
+            sb.append("**repeat one**: on");
+        } else {
+
+            sb.append("**repeat one**: off");
+        }
+        event.getChannel().sendMessage(sb.toString()).queue();
     }
 
 

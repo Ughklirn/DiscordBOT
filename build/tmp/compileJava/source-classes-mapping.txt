@@ -1,21 +1,32 @@
 net/ughklirn/utils/RoleType.java
  net.ughklirn.utils.RoleType
-net/ughklirn/listener/LogMessageListener.java
- net.ughklirn.listener.LogMessageListener
-net/ughklirn/audio/PlayerManager.java
- net.ughklirn.audio.PlayerManager
+net/ughklirn/audio/AudioTrackClone.java
+ net.ughklirn.audio.AudioTrackClone
 net/ughklirn/audio/DiscordAudioLoadResultHandler.java
  net.ughklirn.audio.DiscordAudioLoadResultHandler
+net/ughklirn/audio/lavaplayer/TrackScheduler.java
+ net.ughklirn.audio.lavaplayer.TrackScheduler
 net/ughklirn/utils/DiscordCred.java
  net.ughklirn.utils.DiscordCred
-net/ughklirn/Start.java
- net.ughklirn.Start
+net/ughklirn/audio/lavaplayer/AudioPlayerSendHandler.java
+ net.ughklirn.audio.lavaplayer.AudioPlayerSendHandler
 net/ughklirn/audio/TrackScheduler.java
  net.ughklirn.audio.TrackScheduler
 net/ughklirn/audio/AudioPlayerSendHandler.java
  net.ughklirn.audio.AudioPlayerSendHandler
+net/ughklirn/audio/lavaplayer/PlayerManager.java
+ net.ughklirn.audio.lavaplayer.PlayerManager
+ net.ughklirn.audio.lavaplayer.PlayerManager$1
+net/ughklirn/listener/LogMessageListener.java
+ net.ughklirn.listener.LogMessageListener
 net/ughklirn/listener/CommandListener.java
  net.ughklirn.listener.CommandListener
+net/ughklirn/audio/lavaplayer/GuildMusicManager.java
+ net.ughklirn.audio.lavaplayer.GuildMusicManager
+net/ughklirn/Start.java
+ net.ughklirn.Start
+net/ughklirn/audio/PlayerManager.java
+ net.ughklirn.audio.PlayerManager
 net/ughklirn/listener/AdminEvent.java
  net.ughklirn.listener.AdminEvent
 net/ughklirn/listener/MusicEvent.java
