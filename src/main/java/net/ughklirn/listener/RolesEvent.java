@@ -3,7 +3,7 @@ package net.ughklirn.listener;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.ughklirn.utils.Config;
-import net.ughklirn.utils.RoleType;
+import net.ughklirn.utils.types.TypeRoles;
 
 import java.util.List;
 
@@ -96,8 +96,8 @@ public class RolesEvent {
     }
 
     private static void readLists() {
-        lRoleClans = Config.getInstance().getTextChannels_Commands_Roles().get(RoleType.CLANS);
-        lRoleGames = Config.getInstance().getTextChannels_Commands_Roles().get(RoleType.GAMES);
+        lRoleClans = Config.getInstance().getTextChannels_Commands_Roles().get(TypeRoles.CLANS);
+        lRoleGames = Config.getInstance().getTextChannels_Commands_Roles().get(TypeRoles.GAMES);
 //        BufferedReader br = null;
 //        FileReader fr = null;
 //        lRoleGames = new ArrayList<>();

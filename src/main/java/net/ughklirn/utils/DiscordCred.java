@@ -37,6 +37,8 @@ public class DiscordCred {
     public final static String BOT_CMD_MUSIC_REPEATS = "repeats";
     public final static String BOT_CMD_MUSIC_REPEAT_ALL = "repeatAll";
     public final static String BOT_CMD_MUSIC_PAUSE = "pause";
+    public final static String BOT_CMD_MUSIC_SKIP = "skip";
+    public final static String BOT_CMD_INIT = "init";
 
     /*
      *
@@ -48,6 +50,7 @@ public class DiscordCred {
     public final static String BOT_REACTION_YES = "U+1F44D";
     public final static String BOT_REACTION_NO = "U+1F44E";
     public final static String BOT_REACTION_ACCEPT = "U+2714";
+    public final static String BOT_REACTION_DENY = "U+274C";
     public final static String BOT_REACTION_ERROR = "U+274C";
     public final static String BOT_REACTION_MUSIC_REPEAT_ALL = "U+1F501";
     public final static String BOT_REACTION_MUSIC_REPEAT_ONE = "U+1F502";

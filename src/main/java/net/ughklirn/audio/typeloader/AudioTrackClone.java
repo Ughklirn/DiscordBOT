@@ -1,4 +1,4 @@
-package net.ughklirn.audio;
+package net.ughklirn.audio.typeloader;
 
 import java.time.Duration;
 
@@ -7,6 +7,7 @@ public class AudioTrackClone {
     public static String author;
     public static String uri;
     public static Duration length;
+    public static String identifier;
 
     public static String getTrackInfo() {
         StringBuffer sb = new StringBuffer();
@@ -15,6 +16,7 @@ public class AudioTrackClone {
         sb.append("\t**AUTHOR:** " + author + "\n");
         sb.append("\t**LENGTH:** " + length + "\n");
         sb.append("\t**URI:** <" + uri + ">\n");
+        sb.append("\t**IDENTIFIER:** <" + identifier + ">\n");
         return sb.toString();
     }
 }

@@ -1,4 +1,4 @@
-package net.ughklirn.audio;
+package net.ughklirn.audio.typeloader;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import net.dv8tion.jda.api.entities.Guild;
@@ -11,7 +11,7 @@ public class MusicController {
 
     public MusicController(Guild guild) {
         this.guild = guild;
-        this.player = BOTImpl.INSTANCE.getAudioPlayerManager().createPlayer();
+        this.player = BOTImpl.getInstance().getAudioPlayerManager().createPlayer();
         this.guild.getAudioManager().setSendingHandler(new AudioPlayerSendHandler(this.player));
         if (Config.getInstance().getTextChannel_Music_Volume().get(guild) != null) {
             this.player.setVolume(Config.getInstance().getTextChannel_Music_Volume().get(guild));

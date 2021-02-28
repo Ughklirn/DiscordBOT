@@ -3,6 +3,7 @@ package net.ughklirn.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.dv8tion.jda.api.entities.Guild;
+import net.ughklirn.utils.types.*;
 
 import java.io.*;
 import java.security.CodeSource;
@@ -17,9 +18,14 @@ public class Config {
     private List<String> lTextChannel_Commands_Users;
     private List<String> lTextChannel_Commands_Music;
     private List<String> lTextChannel_Commands_AutoVoiceChannel;
-    private Map<RoleType, List<String>> mTextChannel_Commands_Roles;
+    private Map<TypeRoles, List<String>> mTextChannel_Commands_Roles;
     private Map<Guild, Integer> mTextChannel_Commands_Music_Volume;
     private File file;
+
+    private Map<TypeReactions, String> mapReactions;
+    private Map<TypeCommands, String> mapCommands;
+    private Map<TypeChannels, String> mapChannels;
+    private Map<TypeSettings, String> mapSettings;
 
     private Config() {
         this.file = new File("config.json");
@@ -38,6 +44,11 @@ public class Config {
         if (!file.exists()) {
             this.save();
         }
+        this.mapReactions = new HashMap<>();
+        this.mapChannels = new HashMap<>();
+        this.mapCommands = new HashMap<>();
+        this.mapSettings = new HashMap<>();
+        this.fill();
     }
 
     public Config(Config c) {
@@ -148,7 +159,7 @@ public class Config {
         return lTextChannel_Commands_Users;
     }
 
-    public Map<RoleType, List<String>> getTextChannels_Commands_Roles() {
+    public Map<TypeRoles, List<String>> getTextChannels_Commands_Roles() {
         return mTextChannel_Commands_Roles;
     }
 
@@ -161,9 +172,6 @@ public class Config {
     }
 
     private String readToken() {
-        if (file.exists()) {
-
-        }
         BufferedReader br = null;
         FileReader fr = null;
         List<String> lToken = new ArrayList<>();
@@ -193,8 +201,8 @@ public class Config {
     }
 
     private void readFiles() {
-        this.mTextChannel_Commands_Roles.put(RoleType.GAMES, new LinkedList<>());
-        this.mTextChannel_Commands_Roles.put(RoleType.CLANS, new LinkedList<>());
+        this.mTextChannel_Commands_Roles.put(TypeRoles.GAMES, new LinkedList<>());
+        this.mTextChannel_Commands_Roles.put(TypeRoles.CLANS, new LinkedList<>());
 
 
         BufferedReader br = null;
@@ -209,7 +217,7 @@ public class Config {
             br = new BufferedReader(fr);
             String game;
             while ((game = br.readLine()) != null) {
-                mTextChannel_Commands_Roles.get(RoleType.GAMES).add(game);
+                mTextChannel_Commands_Roles.get(TypeRoles.GAMES).add(game);
             }
 
             /*
@@ -220,7 +228,7 @@ public class Config {
             br = new BufferedReader(fr);
             String clan;
             while ((clan = br.readLine()) != null) {
-                mTextChannel_Commands_Roles.get(RoleType.CLANS).add(clan);
+                mTextChannel_Commands_Roles.get(TypeRoles.CLANS).add(clan);
             }
 
             /*
@@ -298,4 +306,82 @@ public class Config {
         return null;
     }
 
+    /*
+     *
+     * PATH OF DATAS
+     *
+     */
+
+    public final static String BOT_PATH_KEY = "key.txt"; //earlier: "src/main/resources/key.txt"
+    public final static String BOT_PATH_GAMES = "games.txt"; //earlier: "src/main/resources/games.txt"
+    public final static String BOT_PATH_CLAN = "clans.txt"; //earlier: "src/main/resources/clans.txt"
+    public final static String BOT_PATH_CHANNELS_TEXT_MUSIC = "tchannel_music.txt";
+    public final static String BOT_PATH_CHANNELS_TEXT_ADMIN = "tchannel_admin.txt";
+
+    private void fill() {
+        /*
+         *
+         * SETTINGS
+         *
+         */
+
+        this.mapSettings.put(TypeSettings.PREFIX, "%");
+        this.mapSettings.put(TypeSettings.MUSIC_VOLUME, "100");
+
+        /*
+         *
+         * REACTIONS
+         *
+         */
+
+        this.mapReactions.put(TypeReactions.OK, "U+1F44C");
+        this.mapReactions.put(TypeReactions.YES, "U+1F44D");
+        this.mapReactions.put(TypeReactions.NO, "U+1F44E");
+        this.mapReactions.put(TypeReactions.ACCEPT, "U+2714");
+        this.mapReactions.put(TypeReactions.ERROR, "U+274C");
+        this.mapReactions.put(TypeReactions.MUSIC_REPEAT_ALL, "U+1F501");
+        this.mapReactions.put(TypeReactions.MUSIC_REPEAT_ONE, "U+1F502");
+        this.mapReactions.put(TypeReactions.MUSIC_PLAY, "U+25B6");
+        this.mapReactions.put(TypeReactions.MUSIC_STOP, "U+23F9");
+        this.mapReactions.put(TypeReactions.MUSIC_PAUSE, "U+23F8");
+        this.mapReactions.put(TypeReactions.MUSIC_FORWARD, "U+23EA");
+        this.mapReactions.put(TypeReactions.MUSIC_NEXT, "U+23E9");
+        this.mapReactions.put(TypeReactions.MUSIC_VOLUME, "U+1F4F6");
+
+        /*
+         *
+         * COMMANDS
+         *
+         */
+
+        this.mapCommands.put(TypeCommands.TEST, "test");
+        this.mapCommands.put(TypeCommands.SHUTDOWN, "shutdown");
+        this.mapCommands.put(TypeCommands.CONFIG_SAVE, "save");
+        this.mapCommands.put(TypeCommands.CONFIG_LOAD, "load");
+        this.mapCommands.put(TypeCommands.CONFIG_CLEAR, "clear");
+        this.mapCommands.put(TypeCommands.ROLE_JOIN, "join");
+        this.mapCommands.put(TypeCommands.ROLE_LEAVE, "leave");
+        this.mapCommands.put(TypeCommands.MUSIC_PLAY, "play");
+        this.mapCommands.put(TypeCommands.MUSIC_STOP, "stop");
+        this.mapCommands.put(TypeCommands.MUSIC_VOLUME, "vol");
+        this.mapCommands.put(TypeCommands.MUSIC_REPEAT, "repeat");
+        this.mapCommands.put(TypeCommands.MUSIC_REPEATS, "repeats");
+        this.mapCommands.put(TypeCommands.MUSIC_REPEAT_ALL, "repeatAll");
+        this.mapCommands.put(TypeCommands.MUSIC_PAUSE, "pause");
+        this.mapCommands.put(TypeCommands.MUSIC_SKIP, "skip");
+
+        /*
+         *
+         * CHANNELS
+         *
+         */
+
+        this.mapChannels.put(TypeChannels.BOT_LOG_ID, "696727345536434236");
+        this.mapChannels.put(TypeChannels.COMMANDS_ADMIN_ID, "765937224788738049");
+        this.mapChannels.put(TypeChannels.COMMANDS_ID, "434810468486348810");
+        this.mapChannels.put(TypeChannels.ROLES_ID, "765937315457400833");
+        this.mapChannels.put(TypeChannels.MUSIC_ID, "696735057032904766");
+        this.mapChannels.put(TypeChannels.MUSIC_TEAM_ID, "696735011855925370");
+        this.mapChannels.put(TypeChannels.MUSIC_USER_ID, "");
+    }
 }

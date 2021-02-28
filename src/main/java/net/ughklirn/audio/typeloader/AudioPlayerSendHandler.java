@@ -1,31 +1,28 @@
-package net.ughklirn.audio.lavaplayer;
+package net.ughklirn.audio.typeloader;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
-import com.sedmelluq.discord.lavaplayer.track.playback.MutableAudioFrame;
+import com.sedmelluq.discord.lavaplayer.track.playback.AudioFrame;
 import net.dv8tion.jda.api.audio.AudioSendHandler;
 
 import java.nio.ByteBuffer;
 
 public class AudioPlayerSendHandler implements AudioSendHandler {
     private final AudioPlayer audioPlayer;
-    private final ByteBuffer buffer;
-    private final MutableAudioFrame frame;
+    private AudioFrame lastFrame;
 
     public AudioPlayerSendHandler(AudioPlayer audioPlayer) {
         this.audioPlayer = audioPlayer;
-        this.buffer = ByteBuffer.allocate(1024);
-        this.frame = new MutableAudioFrame();
-        this.frame.setBuffer(buffer);
     }
 
     @Override
     public boolean canProvide() {
-        return this.audioPlayer.provide(this.frame);
+        this.lastFrame = this.audioPlayer.provide();
+        return this.lastFrame != null;
     }
 
     @Override
     public ByteBuffer provide20MsAudio() {
-        return this.buffer;
+        return ByteBuffer.wrap(lastFrame.getData());
     }
 
     @Override
