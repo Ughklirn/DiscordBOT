@@ -9,8 +9,10 @@ import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.managers.AudioManager;
 import net.ughklirn.audio.typeloader.BotAudioLoadResultHandler;
-import net.ughklirn.bot.BOTImpl;
+import net.ughklirn.bot.BotDiscord;
+import net.ughklirn.utils.types.TypeReactions;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +25,7 @@ public class LavaPlayer {
     public LavaPlayer() {
         this.event = null;
         this.musicManagers = new HashMap<>();
-        this.playerManager = BOTImpl.getInstance().getAudioPlayerManager();
+        this.playerManager = BotDiscord.getInstance().getAudioPlayerManager();
         AudioSourceManagers.registerRemoteSources(playerManager);
         AudioSourceManagers.registerLocalSource(playerManager);
     }
@@ -88,7 +90,21 @@ public class LavaPlayer {
         GuildMusicManager musicManager = getGuildAudioPlayer(channel.getGuild());
         musicManager.scheduler.pause();
 
-        channel.sendMessage("Freeze the track.").queue();
+        try {
+            channel.sendMessage(BotDiscord.getInstance().getIO().getReactions().getRow(channel.getGuild().getId(), TypeReactions.MUSIC_PAUSE)).queue();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void repeat(TextChannel channel) {
+        GuildMusicManager musicManager = getGuildAudioPlayer(channel.getGuild());
+        musicManager.scheduler.changeRepeating();
+    }
+
+    public void volume(TextChannel channel) {
+        GuildMusicManager musicManager = getGuildAudioPlayer(channel.getGuild());
+        musicManager.scheduler.changeVolume(channel.getGuild().getId());
     }
 
     public static void connectToFirstVoiceChannel(AudioManager audioManager, VoiceChannel vc) {

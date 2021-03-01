@@ -71,11 +71,39 @@ CREATE TABLE reactions
     MUSIC_VOLUME     text
 );
 
-CREATE TABLE ROLES
+CREATE TABLE roles
 (
-    ROLE_ID    integer NOT NULL PRIMARY KEY,
-    SERVER_ID  text,
-    NAME       text,
-    UNIQUENESS boolean,
-    STAFF      boolean
+    ID           text NOT NULL PRIMARY KEY,
+    CLANS        text,
+    GAMES        text,
+    DEVELOPMENTS text,
+    STAFFS       text
+);
+
+CREATE TABLE roles_clans
+(
+    ROLE_NAME text NOT NULL PRIMARY KEY,
+    ID        text REFERENCES roles (ID),
+    TYPE      text
+);
+
+CREATE TABLE roles_games
+(
+    ROLE_NAME text NOT NULL PRIMARY KEY,
+    ID        text REFERENCES roles (ID),
+    TYPE      text
+);
+
+CREATE TABLE roles_developments
+(
+    ROLE_NAME text NOT NULL PRIMARY KEY,
+    ID        text REFERENCES roles (ID),
+    TYPE      text
+);
+
+CREATE TABLE roles_staffs
+(
+    ROLE_NAME text NOT NULL PRIMARY KEY,
+    ID        text REFERENCES roles (ID),
+    TYPE      text
 );

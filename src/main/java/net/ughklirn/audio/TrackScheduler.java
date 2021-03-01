@@ -4,9 +4,10 @@ import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
-import net.dv8tion.jda.api.entities.Guild;
-import net.ughklirn.utils.Config;
+import net.ughklirn.bot.BotDiscord;
+import net.ughklirn.utils.types.TypeSettings;
 
+import java.sql.SQLException;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -16,7 +17,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class TrackScheduler extends AudioEventAdapter {
     private final AudioPlayer player;
     private final BlockingQueue<AudioTrack> queue;
-    private Guild guild;
+    private boolean repeat = false;
 
     /**
      * @param player The audio player this scheduler uses
@@ -52,8 +53,12 @@ public class TrackScheduler extends AudioEventAdapter {
     @Override
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
         // Only start the next track if the end reason is suitable for it (FINISHED or LOAD_FAILED)
-        if (endReason.mayStartNext) {
-            nextTrack();
+        if (!repeat) {
+            if (endReason.mayStartNext) {
+                nextTrack();
+            }
+        } else {
+            this.repeat();
         }
     }
 
@@ -61,11 +66,24 @@ public class TrackScheduler extends AudioEventAdapter {
         player.stopTrack();
     }
 
-    public void pause() {
+    public boolean pause() {
         player.setPaused(!player.isPaused());
+        return player.isPaused();
     }
 
-    public void changeVolume() {
-        player.setVolume(Config.getInstance().getBotMusic_Volume());
+    public void changeVolume(String id) {
+        try {
+            player.setVolume(Integer.parseInt(BotDiscord.getInstance().getIO().getSettings().getRow(id, TypeSettings.MUSIC_VOLUME)));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void changeRepeating() {
+        repeat = !repeat;
+    }
+
+    public void repeat() {
+        player.playTrack(player.getPlayingTrack());
     }
 }

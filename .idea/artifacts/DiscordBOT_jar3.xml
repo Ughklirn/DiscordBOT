@@ -1,0 +1,100 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="DiscordBOT:jar3">
+    <output-path>$PROJECT_DIR$/out/artifacts/DiscordBOT_jar3</output-path>
+    <root id="archive" name="DiscordBOT.jar">
+      <element id="module-output" name="DiscordBOT.main" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/16.0.1/c1a6655cebcac68e63e4c24d23f573035032eb2a/annotations-16.0.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.dv8tion/JDA/4.2.0_227/b3d10bc47043ac606600ebd41bf28b4bf5b185e8/JDA-4.2.0_227.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.opentest4j/opentest4j/1.2.0/28c11eb91f9b6d8e200631d46e20a7f407f2a046/opentest4j-1.2.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-collections4/4.1/a4cf4688fe1c7e3a63aa636cc96d013af537768e/commons-collections4-4.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sedmelluq/lava-common/1.1.2/c9e2c5192a93847edd6b96c2f93530fdcda85028/lava-common-1.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.trove4j/trove4j/3.0.3/42ccaf4761f0dfdfa805c9e340d99a755907e2dd/trove4j-3.0.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/club.minnced/opus-java-api/1.0.4/20e4fafa8523ed391446ddc7dff60ef832f1543a/opus-java-api-1.0.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.10.1/54d72475c0d6819f2d0e9a09d25c3ed876a4972f/jackson-annotations-2.10.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/club.minnced/opus-java-natives/1.0.4/292d015243833578eda04b1ad0af2dc351b14b1b/opus-java-natives-1.0.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.17.2/78c7820b205002da4d2d137f6f312bd64b3d6049/okio-1.17.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.10.1/2c8b5e26ba40e5f91eb37a24075a2028b402c5f9/jackson-core-2.10.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-commons/1.6.0/b0a75795cf03841d4f9cc54099557baffc11c727/junit-platform-commons-1.6.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.13.0/f53f6362226e4546c3987b8693f3d6976df8c797/okhttp-3.13.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.4.12/21ebaf6d532bc350ba95bd81938fa5f0e511c132/httpcore-4.4.12.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sedmelluq/lavaplayer-natives/1.3.13/ddbbad9bca297cd4a0b3e8ca42a9659712004566/lavaplayer-natives-1.3.13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.neovisionaries/nv-websocket-client/2.10/4309de0f0ba90e77f14bf9dd1a43c163d9541e70/nv-websocket-client-2.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apiguardian/apiguardian-api/1.1.0/fc9dff4bb36d627bdc553de77e1f17efd790876c/apiguardian-api-1.1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.5.10/7ca2e4276f4ef95e4db725a8cd4a1d1e7585b9e5/httpclient-4.5.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.java.dev.jna/jna/4.4.0/cb208278274bf12ebdb56c61bd7407e6f774d65a/jna-4.4.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/5.6.0/f29e6318333d2303ce4965c9819cfad08de7d1e5/junit-jupiter-api-5.6.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.6/815893df5f31da2ece4040fe0a12fd44b577afaf/commons-io-2.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.12.1/55819a28fc834c2f2bcf4dcdb278524dc3cf088f/jsoup-1.12.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.25/da76ca59f6a57ee3102f8f9bd9cee742973efa8a/slf4j-api-1.7.25.jar" path-in-jar="/" />
+      <element id="library" level="project" name="Gradle: club.minnced:opus-java:pom:1.0.4" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.11/3acb4705652e16236558f0f4f2192cc33c3bd189/commons-codec-1.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-engine/5.6.0/83c9e737f6015d9e00029b9b1d51e952a884b8f9/junit-jupiter-engine-5.6.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/4bfc12adfe4842bf07b657f0369c4cb522955686/commons-logging-1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.10.1/18eee15ffc662d27538d5b6ee84e4c92c0a9d03e/jackson-databind-2.10.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.iharder/base64/2.3.9/6c34d1c85141be8a21b0a957d84359894e2684b7/base64-2.3.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.2/25ea2e8b0c338a877313bd4672d3fe056ea78f0d/jsr305-3.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.junit.platform/junit-platform-engine/1.6.0/a3a6ec96c010875444b3ca31828108093758ec00/junit-platform-engine-1.6.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sedmelluq/lavaplayer/1.3.71/aba8211eb7a9276d006b7478067f618c1fb5c55b/lavaplayer-1.3.71.jar" path-in-jar="/" />
+      <element id="library" level="project" name="Gradle: net.dv8tion:JDA:4.2.0_227" />
+      <element id="library" level="project" name="Gradle: com.sedmelluq:lavaplayer:1.3.71" />
+      <element id="library" level="project" name="Gradle: com.google.code.findbugs:jsr305:3.0.2" />
+      <element id="library" level="project" name="Gradle: org.jetbrains:annotations:16.0.1" />
+      <element id="library" level="project" name="Gradle: org.slf4j:slf4j-api:1.7.25" />
+      <element id="library" level="project" name="Gradle: com.neovisionaries:nv-websocket-client:2.10" />
+      <element id="library" level="project" name="Gradle: com.squareup.okhttp3:okhttp:3.13.0" />
+      <element id="library" level="project" name="Gradle: org.apache.commons:commons-collections4:4.1" />
+      <element id="library" level="project" name="Gradle: com.sedmelluq:lava-common:1.1.2" />
+      <element id="library" level="project" name="Gradle: com.sedmelluq:lavaplayer-natives:1.3.13" />
+      <element id="library" level="project" name="Gradle: org.apache.httpcomponents:httpclient:4.5.10" />
+      <element id="library" level="project" name="Gradle: commons-io:commons-io:2.6" />
+      <element id="library" level="project" name="Gradle: org.jsoup:jsoup:1.12.1" />
+      <element id="library" level="project" name="Gradle: net.iharder:base64:2.3.9" />
+      <element id="library" level="project" name="Gradle: com.squareup.okio:okio:1.17.2" />
+      <element id="library" level="project" name="Gradle: club.minnced:opus-java-api:1.0.4" />
+      <element id="library" level="project" name="Gradle: club.minnced:opus-java-natives:1.0.4" />
+      <element id="library" level="project" name="Gradle: org.apache.httpcomponents:httpcore:4.4.12" />
+      <element id="library" level="project" name="Gradle: commons-logging:commons-logging:1.2" />
+      <element id="library" level="project" name="Gradle: commons-codec:commons-codec:1.11" />
+      <element id="library" level="project" name="Gradle: net.sf.trove4j:trove4j:3.0.3" />
+      <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.10.1" />
+      <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.10.1" />
+      <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.10.1" />
+      <element id="library" level="project" name="Gradle: net.java.dev.jna:jna:4.4.0" />
+      <element id="library" level="project" name="Gradle: org.junit.jupiter:junit-jupiter-api:5.6.0" />
+      <element id="library" level="project" name="Gradle: org.junit.platform:junit-platform-commons:1.6.0" />
+      <element id="library" level="project" name="Gradle: org.apiguardian:apiguardian-api:1.1.0" />
+      <element id="library" level="project" name="Gradle: org.opentest4j:opentest4j:1.2.0" />
+      <element id="library" level="project" name="Gradle: org.junit.jupiter:junit-jupiter-engine:5.6.0" />
+      <element id="library" level="project" name="Gradle: org.junit.platform:junit-platform-engine:1.6.0" />
+      <element id="library" level="project" name="Gradle: com.google.code.gson:gson:2.8.6" />
+      <element id="library" level="project" name="Gradle: org.apache.cassandra:cassandra-all:0.8.1" />
+      <element id="library" level="project" name="Gradle: org.apache.cassandra.deps:avro:1.4.0-cassandra-1" />
+      <element id="library" level="project" name="Gradle: org.apache.cassandra:cassandra-thrift:0.8.1" />
+      <element id="library" level="project" name="Gradle: org.apache.thrift:libthrift:0.6.1" />
+      <element id="library" level="project" name="Gradle: com.google.guava:guava:r08" />
+      <element id="library" level="project" name="Gradle: commons-cli:commons-cli:1.1" />
+      <element id="library" level="project" name="Gradle: commons-collections:commons-collections:3.2.1" />
+      <element id="library" level="project" name="Gradle: commons-lang:commons-lang:2.5" />
+      <element id="library" level="project" name="Gradle: com.googlecode.concurrentlinkedhashmap:concurrentlinkedhashmap-lru:1.1" />
+      <element id="library" level="project" name="Gradle: org.antlr:antlr:3.2" />
+      <element id="library" level="project" name="Gradle: org.codehaus.jackson:jackson-mapper-asl:1.4.2" />
+      <element id="library" level="project" name="Gradle: org.codehaus.jackson:jackson-core-asl:1.4.2" />
+      <element id="library" level="project" name="Gradle: jline:jline:0.9.94" />
+      <element id="library" level="project" name="Gradle: com.googlecode.json-simple:json-simple:1.1" />
+      <element id="library" level="project" name="Gradle: com.github.stephenc.high-scale-lib:high-scale-lib:1.1.2" />
+      <element id="library" level="project" name="Gradle: org.yaml:snakeyaml:1.6" />
+      <element id="library" level="project" name="Gradle: log4j:log4j:1.2.16" />
+      <element id="library" level="project" name="Gradle: com.github.stephenc:jamm:0.2.2" />
+      <element id="library" level="project" name="Gradle: org.mortbay.jetty:jetty:6.1.22" />
+      <element id="library" level="project" name="Gradle: junit:junit:4.4" />
+      <element id="library" level="project" name="Gradle: javax.servlet:servlet-api:2.5" />
+      <element id="library" level="project" name="Gradle: org.antlr:antlr-runtime:3.2" />
+      <element id="library" level="project" name="Gradle: org.mortbay.jetty:jetty-util:6.1.22" />
+      <element id="library" level="project" name="Gradle: org.mortbay.jetty:servlet-api:2.5-20081211" />
+      <element id="library" level="project" name="Gradle: org.antlr:stringtemplate:3.2" />
+      <element id="library" level="project" name="Gradle: antlr:antlr:2.7.7" />
+      <element id="library" level="project" name="Gradle: org.slf4j:slf4j-log4j12:1.6.1" />
+      <element id="dir-copy" path="$PROJECT_DIR$/src/main/java/META-INF" />
+    </root>
+  </artifact>
+</component>

@@ -2,8 +2,10 @@ package net.ughklirn.audio.typeloader;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import net.dv8tion.jda.api.entities.Guild;
-import net.ughklirn.bot.BOTImpl;
-import net.ughklirn.utils.Config;
+import net.ughklirn.bot.BotDiscord;
+import net.ughklirn.utils.types.TypeSettings;
+
+import java.sql.SQLException;
 
 public class MusicController {
     private Guild guild;
@@ -11,13 +13,13 @@ public class MusicController {
 
     public MusicController(Guild guild) {
         this.guild = guild;
-        this.player = BOTImpl.getInstance().getAudioPlayerManager().createPlayer();
+        this.player = BotDiscord.getInstance().getAudioPlayerManager().createPlayer();
         this.guild.getAudioManager().setSendingHandler(new AudioPlayerSendHandler(this.player));
-        if (Config.getInstance().getTextChannel_Music_Volume().get(guild) != null) {
-            this.player.setVolume(Config.getInstance().getTextChannel_Music_Volume().get(guild));
-        } else {
-            Config.getInstance().setVolume(guild, Config.getInstance().getBotMusic_Volume());
-            this.player.setVolume(Config.getInstance().getTextChannel_Music_Volume().get(guild));
+        try {
+            this.player.setVolume(Integer.parseInt(BotDiscord.getInstance().getIO().getSettings().getRow(guild.getId(), TypeSettings.MUSIC_VOLUME)));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            this.player.setVolume(100);
         }
     }
 
@@ -30,6 +32,11 @@ public class MusicController {
     }
 
     public void reload() {
-        this.player.setVolume(Config.getInstance().getTextChannel_Music_Volume().get(guild));
+        try {
+            this.player.setVolume(Integer.parseInt(BotDiscord.getInstance().getIO().getSettings().getRow(guild.getId(), TypeSettings.MUSIC_VOLUME)));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            this.player.setVolume(100);
+        }
     }
 }

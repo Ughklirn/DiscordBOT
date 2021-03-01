@@ -2,5 +2,7 @@ package net.ughklirn.utils.types;
 
 public enum TypeRoles {
     GAMES,
-    CLANS
+    CLANS,
+    DEVELOPMENTS,
+    STAFFS
 }

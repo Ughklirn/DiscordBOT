@@ -3,7 +3,10 @@ package net.ughklirn.listener;
 import net.dv8tion.jda.api.entities.ChannelType;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.ughklirn.bot.BOTImpl;
+import net.ughklirn.bot.BotDiscord;
+import net.ughklirn.listener.scheduler.AdminEventScheduler;
+import net.ughklirn.listener.scheduler.MusicEventScheduler;
+import net.ughklirn.listener.scheduler.RolesEventScheduler;
 import net.ughklirn.utils.types.TypeCommands;
 import net.ughklirn.utils.types.TypeReactions;
 import net.ughklirn.utils.types.TypeSettings;
@@ -16,47 +19,53 @@ public class CommandListener extends ListenerAdapter {
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
         try {
-            String id = event.getGuild().getId();
-            String prefix = BOTImpl.getInstance().getIO().getSettings().getRow(id, TypeSettings.PREFIX);
             String[] msg = event.getMessage().getContentDisplay().split(" ");
-            if (event.isFromType(ChannelType.TEXT)) {
-                if (event.getMessage().getContentDisplay().startsWith(prefix)) {
-                    if (msg[0].equals(prefix + BOTImpl.getInstance().getIO().getCommands().getRow(id, TypeCommands.MUSIC_PLAY).trim())) {
-                        MusicEvent.play(event);
-                    } else if (msg[0].equals(prefix + BOTImpl.getInstance().getIO().getCommands().getRow(id, TypeCommands.MUSIC_STOP).trim())) {
-                        MusicEvent.stop(event);
-                    } else if (msg[0].equals(prefix + BOTImpl.getInstance().getIO().getCommands().getRow(id, TypeCommands.MUSIC_VOLUME).trim())) {
-                        MusicEvent.volume(event);
-                    } else if (msg[0].equals(prefix + BOTImpl.getInstance().getIO().getCommands().getRow(id, TypeCommands.MUSIC_REPEAT).trim())) {
-                        MusicEvent.repeat(event);
-                    } else if (msg[0].equals(prefix + BOTImpl.getInstance().getIO().getCommands().getRow(id, TypeCommands.MUSIC_REPEATS).trim())) {
-                        MusicEvent.repeatAll(event);
-                    } else if (msg[0].equals(prefix + BOTImpl.getInstance().getIO().getCommands().getRow(id, TypeCommands.MUSIC_REPEAT_ALL).trim())) {
-                        MusicEvent.repeatAll(event);
-                    } else if (msg[0].equals(prefix + BOTImpl.getInstance().getIO().getCommands().getRow(id, TypeCommands.MUSIC_PAUSE).trim())) {
-                        MusicEvent.pause(event);
-                    } else if (msg[0].equals(prefix + BOTImpl.getInstance().getIO().getCommands().getRow(id, TypeCommands.MUSIC_SKIP).trim())) {
-                        MusicEvent.skip(event);
-                    } else if (msg[0].equals(prefix + BOTImpl.getInstance().getIO().getCommands().getRow(id, TypeCommands.ROLE_JOIN).trim())) {
-                        RolesEvent.join(event);
-                    } else if (msg[0].equals(prefix + BOTImpl.getInstance().getIO().getCommands().getRow(id, TypeCommands.ROLE_LEAVE).trim())) {
-                        RolesEvent.leave(event);
-                    } else if (msg[0].equals(prefix + BOTImpl.getInstance().getIO().getCommands().getRow(id, TypeCommands.TEST).trim())) {
-                        RolesEvent.test(event);
-                    } else if (msg[0].equals(prefix + BOTImpl.getInstance().getIO().getCommands().getRow(id, TypeCommands.CONFIG_SAVE).trim())) {
-                        PersistenceEvent.save(event);
-                    } else if (msg[0].equals(prefix + BOTImpl.getInstance().getIO().getCommands().getRow(id, TypeCommands.CONFIG_LOAD).trim())) {
-                        PersistenceEvent.load(event);
-                    } else if (msg[0].equals(prefix + BOTImpl.getInstance().getIO().getCommands().getRow(id, TypeCommands.SHUTDOWN).trim())) {
-                        AdminEvent.shutdown(event);
-                    } else if (msg[0].equals(prefix + BOTImpl.getInstance().getIO().getCommands().getRow(id, TypeCommands.INIT).trim())) {
-                        BOTImpl.getInstance().getIO().create(id);
-                        event.getMessage().addReaction(BOTImpl.getInstance().getIO().getReactions().getRow(id, TypeReactions.OK));
-                    } else if (msg[0].equals("%initialize")) {
-                        BOTImpl.getInstance().getIO().create(id);
-                    } else {
-                        throw new IllegalArgumentException();
+            String id = event.getGuild().getId();
+            try {
+                String prefix = BotDiscord.getInstance().getIO().getSettings().getRow(id, TypeSettings.PREFIX);
+                if (event.isFromType(ChannelType.TEXT)) {
+                    if (event.getMessage().getContentDisplay().startsWith(prefix)) {
+                        if (msg[0].equals(prefix + BotDiscord.getInstance().getIO().getCommands().getRow(id, TypeCommands.MUSIC_PLAY).trim())) {
+                            MusicEventScheduler.play(event);
+                        } else if (msg[0].equals(prefix + BotDiscord.getInstance().getIO().getCommands().getRow(id, TypeCommands.MUSIC_STOP).trim())) {
+                            MusicEventScheduler.stop(event);
+                        } else if (msg[0].equals(prefix + BotDiscord.getInstance().getIO().getCommands().getRow(id, TypeCommands.MUSIC_VOLUME).trim())) {
+                            MusicEventScheduler.volume(event);
+                        } else if (msg[0].equals(prefix + BotDiscord.getInstance().getIO().getCommands().getRow(id, TypeCommands.MUSIC_REPEAT).trim())) {
+                            MusicEventScheduler.repeat(event);
+                        } else if (msg[0].equals(prefix + BotDiscord.getInstance().getIO().getCommands().getRow(id, TypeCommands.MUSIC_REPEATS).trim())) {
+                            MusicEventScheduler.repeatAll(event);
+                        } else if (msg[0].equals(prefix + BotDiscord.getInstance().getIO().getCommands().getRow(id, TypeCommands.MUSIC_REPEAT_ALL).trim())) {
+                            MusicEventScheduler.repeatAll(event);
+                        } else if (msg[0].equals(prefix + BotDiscord.getInstance().getIO().getCommands().getRow(id, TypeCommands.MUSIC_PAUSE).trim())) {
+                            MusicEventScheduler.pause(event);
+                        } else if (msg[0].equals(prefix + BotDiscord.getInstance().getIO().getCommands().getRow(id, TypeCommands.MUSIC_SKIP).trim())) {
+                            MusicEventScheduler.skip(event);
+                        } else if (msg[0].equals(prefix + BotDiscord.getInstance().getIO().getCommands().getRow(id, TypeCommands.ROLE_JOIN).trim())) {
+                            RolesEventScheduler.join(event);
+                        } else if (msg[0].equals(prefix + BotDiscord.getInstance().getIO().getCommands().getRow(id, TypeCommands.ROLE_LEAVE).trim())) {
+                            RolesEventScheduler.leave(event);
+                        } else if (msg[0].equals(prefix + BotDiscord.getInstance().getIO().getCommands().getRow(id, TypeCommands.TEST).trim())) {
+                            AdminEventScheduler.test(event);
+                        } else if (msg[0].equals(prefix + BotDiscord.getInstance().getIO().getCommands().getRow(id, TypeCommands.SHUTDOWN).trim())) {
+                            AdminEventScheduler.shutdown(event);
+                        } else if (msg[0].equals(prefix + BotDiscord.getInstance().getIO().getCommands().getRow(id, TypeCommands.INIT).trim())) {
+                            BotDiscord.getInstance().getIO().create(id);
+                            event.getMessage().addReaction(BotDiscord.getInstance().getIO().getReactions().getRow(id, TypeReactions.OK));
+                        } else {
+                            if (msg[0].equals("%initialize")) {
+                                BotDiscord.getInstance().getIO().create(id);
+                                event.getMessage().addReaction("U+1F44C");
+                            } else {
+                                throw new IllegalArgumentException();
+                            }
+                        }
                     }
+                }
+            } catch (NullPointerException e) {
+                if (msg[0].equals("%initialize")) {
+                    BotDiscord.getInstance().getIO().create(id);
+                    event.getMessage().addReaction("U+1F44C");
                 }
             }
         } catch (SQLException throwables) {
