@@ -1,96 +1,66 @@
-net/ughklirn/listener/events/MusicEvent.java
- net.ughklirn.listener.events.MusicEvent
-net/ughklirn/audio/GuildMusicManager.java
- net.ughklirn.audio.GuildMusicManager
-net/ughklirn/audio/typeloader/DiscordAudioLoadResultHandler.java
- net.ughklirn.audio.typeloader.DiscordAudioLoadResultHandler
-net/ughklirn/audio/typeloader/AudioPlayerSendHandler.java
- net.ughklirn.audio.typeloader.AudioPlayerSendHandler
-net/ughklirn/audio/typeloader/PlayerManager.java
- net.ughklirn.audio.typeloader.PlayerManager
-net/ughklirn/utils/Configuration.java
- net.ughklirn.utils.Configuration
-net/ughklirn/database/io/IOInitialize.java
- net.ughklirn.database.io.IOInitialize
+net/ughklirn/utils/types/TypeSettings.java
+ net.ughklirn.utils.types.TypeSettings
+net/ughklirn/audio/PlayerManager.java
+ net.ughklirn.audio.PlayerManager
+net/ughklirn/audio/MusicController.java
+ net.ughklirn.audio.MusicController
+net/ughklirn/connections/io/IOSettings.java
+ net.ughklirn.connections.io.IOSettings
+net/ughklirn/audio/TrackScheduler.java
+ net.ughklirn.audio.TrackScheduler
+net/ughklirn/connections/IDatabase.java
+ net.ughklirn.connections.IDatabase
+net/ughklirn/listener/CommandListener.java
+ net.ughklirn.listener.CommandListener
+net/ughklirn/scheduler/AdminEventScheduler.java
+ net.ughklirn.scheduler.AdminEventScheduler
+net/ughklirn/connections/DbCred.java
+ net.ughklirn.connections.DbCred
+net/ughklirn/connections/io/IORoles.java
+ net.ughklirn.connections.io.IORoles
+net/ughklirn/Start.java
+ net.ughklirn.Start
 net/ughklirn/utils/types/TypeReactions.java
  net.ughklirn.utils.types.TypeReactions
-net/ughklirn/bot/BOT.java
- net.ughklirn.bot.BOT
-net/ughklirn/utils/settings/SettingsCommands.java
- net.ughklirn.utils.settings.SettingsCommands
-net/ughklirn/utils/DiscordCred.java
- net.ughklirn.utils.DiscordCred
-net/ughklirn/database/io/IOSettings.java
- net.ughklirn.database.io.IOSettings
-net/ughklirn/database/io/IOReactions.java
- net.ughklirn.database.io.IOReactions
+net/ughklirn/connections/Database.java
+ net.ughklirn.connections.Database
+net/ughklirn/audio/DiscordAudioLoadResultHandler.java
+ net.ughklirn.audio.DiscordAudioLoadResultHandler
+net/ughklirn/connections/JDBCAccess.java
+ net.ughklirn.connections.JDBCAccess
+net/ughklirn/connections/io/IOChannels.java
+ net.ughklirn.connections.io.IOChannels
+net/ughklirn/audio/DiscordAudioSendHandler.java
+ net.ughklirn.audio.DiscordAudioSendHandler
+net/ughklirn/connections/io/IOReactions.java
+ net.ughklirn.connections.io.IOReactions
+net/ughklirn/scheduler/RolesEventScheduler.java
+ net.ughklirn.scheduler.RolesEventScheduler
+net/ughklirn/connections/io/IOInitialize.java
+ net.ughklirn.connections.io.IOInitialize
+net/ughklirn/utils/types/TypeRoles.java
+ net.ughklirn.utils.types.TypeRoles
 net/ughklirn/exceptions/DriverFailedException.java
  net.ughklirn.exceptions.DriverFailedException
 net/ughklirn/utils/types/Types.java
  net.ughklirn.utils.types.Types
-net/ughklirn/utils/types/TypeCommands.java
- net.ughklirn.utils.types.TypeCommands
-net/ughklirn/database/io/IORoles.java
- net.ughklirn.database.io.IORoles
-net/ughklirn/StartConfig.java
- net.ughklirn.StartConfig
-net/ughklirn/database/io/IOChannels.java
- net.ughklirn.database.io.IOChannels
-net/ughklirn/utils/settings/SettingsRoles.java
- net.ughklirn.utils.settings.SettingsRoles
-net/ughklirn/audio/typeloader/AudioTrackClone.java
- net.ughklirn.audio.typeloader.AudioTrackClone
-net/ughklirn/utils/types/TypeSettings.java
- net.ughklirn.utils.types.TypeSettings
-net/ughklirn/database/DbCred.java
- net.ughklirn.database.DbCred
-net/ughklirn/audio/TrackScheduler.java
- net.ughklirn.audio.TrackScheduler
-net/ughklirn/utils/settings/Settings.java
- net.ughklirn.utils.settings.Settings
-net/ughklirn/audio/AudioPlayerSendHandler.java
- net.ughklirn.audio.AudioPlayerSendHandler
-net/ughklirn/utils/settings/SettingsChannels.java
- net.ughklirn.utils.settings.SettingsChannels
-net/ughklirn/utils/settings/SettingsReactions.java
- net.ughklirn.utils.settings.SettingsReactions
-net/ughklirn/Start.java
- net.ughklirn.Start
-net/ughklirn/database/io/InputOutput.java
- net.ughklirn.database.io.InputOutput
-net/ughklirn/database/Database.java
- net.ughklirn.database.Database
-net/ughklirn/utils/types/TypeRoles.java
- net.ughklirn.utils.types.TypeRoles
-net/ughklirn/database/IDatabase.java
- net.ughklirn.database.IDatabase
-net/ughklirn/audio/LavaPlayer.java
- net.ughklirn.audio.LavaPlayer
-net/ughklirn/utils/Config.java
- net.ughklirn.utils.Config
-net/ughklirn/audio/typeloader/MusicController.java
- net.ughklirn.audio.typeloader.MusicController
-net/ughklirn/audio/typeloader/BotAudioLoadResultHandler.java
- net.ughklirn.audio.typeloader.BotAudioLoadResultHandler
 net/ughklirn/listener/LogMessageListener.java
  net.ughklirn.listener.LogMessageListener
-net/ughklirn/utils/Text.java
- net.ughklirn.utils.Text
-net/ughklirn/utils/MemberSettings.java
- net.ughklirn.utils.MemberSettings
+net/ughklirn/utils/types/TypeCommands.java
+ net.ughklirn.utils.types.TypeCommands
+net/ughklirn/StartConfig.java
+ net.ughklirn.StartConfig
 net/ughklirn/utils/types/TypeChannels.java
  net.ughklirn.utils.types.TypeChannels
-net/ughklirn/database/io/IOCommands.java
- net.ughklirn.database.io.IOCommands
-net/ughklirn/database/JDBCAccess.java
- net.ughklirn.database.JDBCAccess
-net/ughklirn/audio/typeloader/TrackScheduler.java
- net.ughklirn.audio.typeloader.TrackScheduler
-net/ughklirn/listener/events/RolesEvent.java
- net.ughklirn.listener.events.RolesEvent
-net/ughklirn/bot/BOTImpl.java
- net.ughklirn.bot.BOTImpl
-net/ughklirn/listener/events/AdminEvent.java
- net.ughklirn.listener.events.AdminEvent
-net/ughklirn/listener/CommandListener.java
- net.ughklirn.listener.CommandListener
+net/ughklirn/bot/BotDiscord.java
+ net.ughklirn.bot.BotDiscord
+net/ughklirn/connections/io/IOCommands.java
+ net.ughklirn.connections.io.IOCommands
+net/ughklirn/utils/texts/Text.java
+ net.ughklirn.utils.texts.Text
+net/ughklirn/scheduler/MusicEventScheduler.java
+ net.ughklirn.scheduler.MusicEventScheduler
+net/ughklirn/connections/io/InputOutput.java
+ net.ughklirn.connections.io.InputOutput
+net/ughklirn/bot/Bot.java
+ net.ughklirn.bot.Bot

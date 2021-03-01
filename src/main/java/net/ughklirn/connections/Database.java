@@ -21,7 +21,6 @@ public class Database implements IDatabase {
     private JDBCAccess db;
 
     private Database() {
-
     }
 
     public static IDatabase getInstance() {
@@ -34,8 +33,9 @@ public class Database implements IDatabase {
     @Override
     public IDatabase connect() {
         try {
+            Class.forName(DbCred.driverClass);
             this.db = new JDBCAccess(DbCred.url, DbCred.user, DbCred.password);
-        } catch (DriverFailedException e) {
+        } catch (DriverFailedException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return this;

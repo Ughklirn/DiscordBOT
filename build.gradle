@@ -9,7 +9,11 @@ group 'net.ughklirn'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = JavaVersion.VERSION_11
-
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': '1.0'
+    }
+}
 repositories {
     mavenCentral()
     jcenter()

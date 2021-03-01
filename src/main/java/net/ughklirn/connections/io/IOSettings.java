@@ -21,14 +21,25 @@ public class IOSettings {
             cell = rs.getString(type.name());
             System.err.println("IO SET: " + cell);
         }
+        rs.close();
         return cell;
     }
 
     public void setRow(String id, TypeSettings type, String value) throws SQLException {
-        this.db.executeQuery("SELECT * FROM settings WHERE ID = " + id).updateString(type.name(), value);
+        ResultSet rs = this.db.executeQuery("SELECT * FROM settings WHERE ID = '" + id + "'");
+        while (rs.next()) {
+            rs.updateString(type.name(), value);
+            rs.updateRow();
+        }
+        rs.close();
     }
 
     public void setRow(String id, TypeSettings type, int value) throws SQLException {
-        this.db.executeQuery("SELECT * FROM settings WHERE ID = " + id).updateInt(type.name(), value);
+        ResultSet rs = this.db.executeQuery("SELECT * FROM settings WHERE ID = '" + id + "'");
+        while (rs.next()) {
+            rs.updateInt(type.name(), value);
+            rs.updateRow();
+        }
+        rs.close();
     }
 }

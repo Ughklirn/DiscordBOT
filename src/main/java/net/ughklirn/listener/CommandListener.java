@@ -4,9 +4,9 @@ import net.dv8tion.jda.api.entities.ChannelType;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.ughklirn.bot.BotDiscord;
-import net.ughklirn.listener.scheduler.AdminEventScheduler;
-import net.ughklirn.listener.scheduler.MusicEventScheduler;
-import net.ughklirn.listener.scheduler.RolesEventScheduler;
+import net.ughklirn.scheduler.AdminEventScheduler;
+import net.ughklirn.scheduler.MusicEventScheduler;
+import net.ughklirn.scheduler.RolesEventScheduler;
 import net.ughklirn.utils.types.TypeCommands;
 import net.ughklirn.utils.types.TypeReactions;
 import net.ughklirn.utils.types.TypeSettings;
@@ -67,6 +67,7 @@ public class CommandListener extends ListenerAdapter {
                     BotDiscord.getInstance().getIO().create(id);
                     event.getMessage().addReaction("U+1F44C");
                 }
+                e.printStackTrace();
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
