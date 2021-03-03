@@ -4,16 +4,22 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '4.0.4'
 }
 
-mainClassName = 'net.ughklirn.Bot'
+mainClassName = 'net.ughklirn.Start'
 group 'net.ughklirn'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = JavaVersion.VERSION_11
+
 jar {
     manifest {
-        attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': '1.0'
+        attributes "Main-Class": "net.ughklirn.Start"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
+
 repositories {
     mavenCentral()
     jcenter()
@@ -63,4 +69,9 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+task sourcesJar(type: Jar) {
+    archiveClassifier = 'sources'
+    from sourceSets.main.allJava
 }
