@@ -6,14 +6,10 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.ughklirn.audio.GuildMusicManager;
 import net.ughklirn.audio.PlayerManager;
-import net.ughklirn.bot.BotDiscord;
 import net.ughklirn.commands.CommandContext;
 import net.ughklirn.commands.ICommand;
-import net.ughklirn.utils.types.TypeSettings;
 
-import java.sql.SQLException;
-
-public class CmdMusicVolume implements ICommand {
+public class CmdMusicPause implements ICommand {
     @Override
     public void handle(CommandContext ctx) {
         final TextChannel channel = ctx.getChannel();
@@ -46,25 +42,23 @@ public class CmdMusicVolume implements ICommand {
             return;
         }
 
-        try {
-            BotDiscord.getInstance().getIO().getSettings().setRow(ctx.getGuild().getId(), TypeSettings.MUSIC_VOLUME, Integer.parseInt(ctx.getArgs().get(1)));
-            musicManager.scheduler.player.setVolume(Integer.parseInt(BotDiscord.getInstance().getIO().getSettings().getRow(ctx.getGuild().getId(), TypeSettings.MUSIC_VOLUME)));
-            channel.sendMessage("Change the volume to " + ctx.getArgs().get(1)).queue();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (NumberFormatException e) {
-            channel.sendMessage(ctx.getArgs().get(1) + " is not a valid integer to change the volume").queue();
-            e.printStackTrace();
+        if (musicManager.scheduler.player.isPaused()) {
+            musicManager.scheduler.player.setPaused(false);
+            channel.sendMessage("Play the track now").queue();
+        } else {
+            musicManager.scheduler.player.setPaused(true);
+            channel.sendMessage("Pause the track now").queue();
         }
+
     }
 
     @Override
     public String getName() {
-        return "volume";
+        return "pause";
     }
 
     @Override
     public String getHelp() {
-        return "volume the audio player";
+        return "pause the current track";
     }
 }

@@ -37,6 +37,8 @@ public class CommandManager {
         this.addCommandMusic(new CmdMusicRepeat());
         this.addCommandMusic(new CmdMusicSkip());
         this.addCommandMusic(new CmdMusicStop());
+        this.addCommandMusic(new CmdMusicVolume());
+        this.addCommandMusic(new CmdMusicPause());
 
         /*
          * add commands roles

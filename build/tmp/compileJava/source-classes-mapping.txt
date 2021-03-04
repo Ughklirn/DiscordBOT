@@ -21,8 +21,8 @@ net/ughklirn/connections/IDatabase.java
  net.ughklirn.connections.IDatabase
 net/ughklirn/utils/types/TypeChannels.java
  net.ughklirn.utils.types.TypeChannels
-net/ughklirn/scheduler/AdminEventScheduler.java
- net.ughklirn.scheduler.AdminEventScheduler
+net/ughklirn/connections/io/InputOutput.java
+ net.ughklirn.connections.io.InputOutput
 net/ughklirn/commands/roles/CmdRolesLeave.java
  net.ughklirn.commands.roles.CmdRolesLeave
 net/ughklirn/commands/CommandContext.java
@@ -49,8 +49,8 @@ net/ughklirn/connections/io/IOReactions.java
  net.ughklirn.connections.io.IOReactions
 net/ughklirn/commands/roles/CmdRolesJoin.java
  net.ughklirn.commands.roles.CmdRolesJoin
-net/ughklirn/scheduler/RolesEventScheduler.java
- net.ughklirn.scheduler.RolesEventScheduler
+net/ughklirn/bot/Bot.java
+ net.ughklirn.bot.Bot
 net/ughklirn/connections/io/IOInitialize.java
  net.ughklirn.connections.io.IOInitialize
 net/ughklirn/utils/types/TypeRoles.java
@@ -73,16 +73,14 @@ net/ughklirn/utils/types/TypeCommands.java
  net.ughklirn.utils.types.TypeCommands
 net/ughklirn/bot/BotDiscord.java
  net.ughklirn.bot.BotDiscord
-net/ughklirn/commands/music/CmdMusicVolume.java
- net.ughklirn.commands.music.CmdMusicVolume
-net/ughklirn/connections/io/IOCommands.java
- net.ughklirn.connections.io.IOCommands
-net/ughklirn/connections/io/InputOutput.java
- net.ughklirn.connections.io.InputOutput
-net/ughklirn/bot/Bot.java
- net.ughklirn.bot.Bot
 net/ughklirn/commands/music/CmdMusicInfo.java
  net.ughklirn.commands.music.CmdMusicInfo
+net/ughklirn/connections/io/IOCommands.java
+ net.ughklirn.connections.io.IOCommands
+net/ughklirn/commands/music/CmdMusicVolume.java
+ net.ughklirn.commands.music.CmdMusicVolume
+net/ughklirn/commands/music/CmdMusicPause.java
+ net.ughklirn.commands.music.CmdMusicPause
 net/ughklirn/listener/CommandListener.java
  net.ughklirn.listener.CommandListener
 net/ughklirn/commands/CommandManager.java
