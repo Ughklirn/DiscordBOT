@@ -4,11 +4,15 @@ import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.ughklirn.audio.PlayerManager;
+import net.ughklirn.bot.BotDiscord;
 import net.ughklirn.commands.CommandContext;
 import net.ughklirn.commands.ICommand;
+import net.ughklirn.utils.types.TypeCommands;
+import net.ughklirn.utils.types.TypeSettings;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.SQLException;
 
 public class CmdMusicPlay implements ICommand {
     @SuppressWarnings("ConstantConditions")
@@ -42,7 +46,12 @@ public class CmdMusicPlay implements ICommand {
             return;
         }
 
-        String link = String.join(" ", ctx.getArgs());
+        String link = null;
+        try {
+            link = String.join(" ", ctx.getArgs()).replace(BotDiscord.getInstance().getIO().getSettings().getRow(ctx.getGuild().getId(), TypeSettings.PREFIX) + BotDiscord.getInstance().getIO().getCommands().getRow(ctx.getGuild().getId(), TypeCommands.MUSIC_PLAY), "").replace("<", "").replace(">", "");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
         if (!isUrl(link)) {
             link = "ytsearch:" + link;

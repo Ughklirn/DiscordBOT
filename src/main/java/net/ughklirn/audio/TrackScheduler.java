@@ -4,7 +4,10 @@ import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
+import net.ughklirn.bot.BotDiscord;
+import net.ughklirn.utils.types.TypeSettings;
 
+import java.sql.SQLException;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -37,6 +40,14 @@ public class TrackScheduler extends AudioEventAdapter {
             }
 
             nextTrack();
+        }
+    }
+
+    public void setVolume(String id) {
+        try {
+            this.player.setVolume(Integer.parseInt(BotDiscord.getInstance().getIO().getSettings().getRow(id, TypeSettings.MUSIC_VOLUME)));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 }
