@@ -1,15 +1,17 @@
 ## General
 
 * Start (cmd, ps, shell):
-    * java -jar DiscordBOT.jar
+    * java -jar DiscordBOT.jar <Bot-Art>
 
-## Textfiles
+## Textfiles (obsolet)
 
 | File		 | Description		      |
 | ---------- | -------------------- |
 | key.txt	 | enter the Bot Token  |
 | clans.txt	 | enter clan groups    |
 | games.txt	 | enter games groups   |
+
+Replaced with the connection to a database.
 
 ## Enter in discord
 
