@@ -1,7 +1,7 @@
 ## General
 
 * Start (cmd, ps, shell):
-    * java -jar DiscordBOT.jar <Bot-Art>
+    * java -jar DiscordBOT.jar [Bot-Art]
 
 ## Textfiles (obsolet)
 
