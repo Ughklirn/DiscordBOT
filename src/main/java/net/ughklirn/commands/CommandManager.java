@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.events.guild.GenericGuildEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.ughklirn.bot.BotDiscord;
 import net.ughklirn.commands.music.*;
+import net.ughklirn.commands.poll.CmdPoll;
 import net.ughklirn.commands.roles.CmdRolesJoin;
 import net.ughklirn.commands.roles.CmdRolesLeave;
 import net.ughklirn.utils.types.TypeChannels;
@@ -19,17 +20,20 @@ import java.util.List;
 public class CommandManager {
     private List<ICommand> lMusicCommands = new ArrayList<>();
     private List<ICommand> lRolesCommands = new ArrayList<>();
+    private List<ICommand> lPollCommands = new ArrayList<>();
     private List<String> lChannelsMusic;
     private List<String> lChannelsControl;
     private List<String> lChannelsLog;
     private List<String> lChannelsRoles;
     private List<String> lCommandsMusic;
     private List<String> lCommandsRoles;
+    private List<String> lCommandsPoll;
 
     public CommandManager() {
         /*
          * add commands music
          */
+
         this.addCommandMusic(new CmdMusicJoin());
         this.addCommandMusic(new CmdMusicPlay());
         this.addCommandMusic(new CmdMusicInfo());
@@ -43,8 +47,15 @@ public class CommandManager {
         /*
          * add commands roles
          */
+
         this.addCommandRoles(new CmdRolesJoin());
         this.addCommandRoles(new CmdRolesLeave());
+
+        /*
+         * add commands roles
+         */
+
+        this.addCommandPoll(new CmdPoll());
     }
 
     private void addCommandMusic(ICommand cmd) {
@@ -67,6 +78,16 @@ public class CommandManager {
         lRolesCommands.add(cmd);
     }
 
+    private void addCommandPoll(ICommand cmd) {
+        boolean nameFound = this.lPollCommands.stream().anyMatch((it) -> it.getName().equalsIgnoreCase(cmd.getName()));
+
+        if (nameFound) {
+            throw new IllegalArgumentException("A command with this name is already present");
+        }
+
+        lPollCommands.add(cmd);
+    }
+
     public List<ICommand> getCommandsMusic() {
         return lMusicCommands;
     }
@@ -74,6 +95,11 @@ public class CommandManager {
 
     public List<ICommand> getCommandsRoles() {
         return lRolesCommands;
+    }
+
+
+    public List<ICommand> getCommandsPoll() {
+        return lPollCommands;
     }
 
     @Nullable
@@ -102,30 +128,53 @@ public class CommandManager {
         return null;
     }
 
+    @Nullable
+    public ICommand getCommandPoll(String search) {
+        String searchLower = search.toLowerCase();
+
+        for (ICommand cmd : this.lPollCommands) {
+            if (cmd.getName().equals(searchLower) || cmd.getAliases().contains(searchLower)) {
+                return cmd;
+            }
+        }
+
+        return null;
+    }
+
     public void handle(GuildMessageReceivedEvent event, String prefix) {
         this.fillLists(event);
         String[] msg = event.getMessage().getContentRaw().split(" ");
 
         String invoke = msg[0].replace(prefix, "");
-
-        if (this.lChannelsMusic.contains(event.getChannel().getId())) {
-            ICommand cmdMusic = this.getCommandMusic(invoke);
-            if (this.lCommandsMusic.contains(invoke)) {
+        System.out.println("\t" + invoke);
+        try {
+            if (this.lChannelsMusic.contains(event.getChannel().getId())) {
+                ICommand cmdMusic = this.getCommandMusic(invoke);
+                if (this.lCommandsMusic.contains(invoke)) {
+                    event.getChannel().sendTyping().queue();
+                    List<String> args = Arrays.asList(msg);
+                    CommandContext cmdStorage = new CommandContext(event, args);
+                    cmdMusic.handle(cmdStorage);
+                }
+            } else if (this.lChannelsRoles.contains(event.getChannel().getId())) {
+                ICommand cmdRoles = this.getCommandRoles(invoke);
+                if (this.lCommandsRoles.contains(invoke)) {
+                    event.getChannel().sendTyping().queue();
+                    List<String> args = Arrays.asList(msg);
+                    CommandContext cmdStorage = new CommandContext(event, args);
+                    cmdRoles.handle(cmdStorage);
+                }
+            } else if (invoke.equals(BotDiscord.getInstance().getIO().getCommands().getRow(event.getGuild().getId(), TypeCommands.POLL))) {
+                ICommand cmdPoll = this.getCommandPoll(invoke);
                 event.getChannel().sendTyping().queue();
                 List<String> args = Arrays.asList(msg);
                 CommandContext cmdStorage = new CommandContext(event, args);
-                cmdMusic.handle(cmdStorage);
-            }
-        } else if (this.lChannelsRoles.contains(event.getChannel().getId())) {
-            ICommand cmdRoles = this.getCommandRoles(invoke);
-            if (this.lCommandsRoles.contains(invoke)) {
-                event.getChannel().sendTyping().queue();
-                List<String> args = Arrays.asList(msg);
-                CommandContext cmdStorage = new CommandContext(event, args);
-                cmdRoles.handle(cmdStorage);
-            }
-        } else {
+                cmdPoll.handle(cmdStorage);
+            } else {
 
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 
@@ -136,6 +185,7 @@ public class CommandManager {
         this.lChannelsRoles = new ArrayList<>();
         this.lCommandsMusic = new ArrayList<>();
         this.lCommandsRoles = new ArrayList<>();
+        this.lCommandsPoll = new ArrayList<>();
         try {
             /*
              * Channels, Music
@@ -166,6 +216,12 @@ public class CommandManager {
              */
             this.lCommandsRoles.add(BotDiscord.getInstance().getIO().getCommands().getRow(((GenericGuildEvent) event).getGuild().getId(), TypeCommands.ROLE_JOIN));
             this.lCommandsRoles.add(BotDiscord.getInstance().getIO().getCommands().getRow(((GenericGuildEvent) event).getGuild().getId(), TypeCommands.ROLE_LEAVE));
+            /*
+             * Commands, Poll
+             */
+
+            this.lCommandsPoll.add(BotDiscord.getInstance().getIO().getCommands().getRow(((GenericGuildEvent) event).getGuild().getId(), TypeCommands.POLL));
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
