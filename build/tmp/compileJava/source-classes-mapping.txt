@@ -4,25 +4,24 @@ net/ughklirn/utils/types/TypeSettings.java
  net.ughklirn.utils.types.TypeSettings
 net/ughklirn/audio/TrackScheduler.java
  net.ughklirn.audio.TrackScheduler
-net/ughklirn/commands/music/CmdMusicInfo.java
- net.ughklirn.commands.music.CmdMusicInfo
+net/ughklirn/commands/music/CmdMusicPause.java
+ net.ughklirn.commands.music.CmdMusicPause
 net/ughklirn/connections/io/IOSettings.java
  net.ughklirn.connections.io.IOSettings
-net/ughklirn/commands/music/CmdMusicQueue.java
- net.ughklirn.commands.music.CmdMusicQueue
+net/ughklirn/commands/music/CmdMusicVolume.java
+ net.ughklirn.commands.music.CmdMusicVolume
 net/ughklirn/commands/music/CmdMusicJoin.java
  net.ughklirn.commands.music.CmdMusicJoin
-net/ughklirn/commands/music/CmdMusicStop.java
- net.ughklirn.commands.music.CmdMusicStop
+net/ughklirn/commands/music/CmdMusicQueue.java
+ net.ughklirn.commands.music.CmdMusicQueue
 net/ughklirn/audio/AudioPlayerSendHandler.java
  net.ughklirn.audio.AudioPlayerSendHandler
 net/ughklirn/connections/IDatabase.java
  net.ughklirn.connections.IDatabase
 net/ughklirn/utils/types/TypeChannels.java
  net.ughklirn.utils.types.TypeChannels
-net/ughklirn/audio/PlayerManager.java
- net.ughklirn.audio.PlayerManager
- net.ughklirn.audio.PlayerManager$1
+net/ughklirn/commands/music/CmdMusicSkip.java
+ net.ughklirn.commands.music.CmdMusicSkip
 net/ughklirn/commands/roles/CmdRolesLeave.java
  net.ughklirn.commands.roles.CmdRolesLeave
 net/ughklirn/commands/CommandContext.java
@@ -33,10 +32,11 @@ net/ughklirn/connections/io/IORoles.java
  net.ughklirn.connections.io.IORoles
 net/ughklirn/commands/ICommand.java
  net.ughklirn.commands.ICommand
-net/ughklirn/commands/music/CmdMusicRepeat.java
- net.ughklirn.commands.music.CmdMusicRepeat
-net/ughklirn/commands/music/CmdMusicVolume.java
- net.ughklirn.commands.music.CmdMusicVolume
+net/ughklirn/audio/GuildMusicManager.java
+ net.ughklirn.audio.GuildMusicManager
+net/ughklirn/audio/PlayerManager.java
+ net.ughklirn.audio.PlayerManager
+ net.ughklirn.audio.PlayerManager$1
 net/ughklirn/utils/types/TypeReactions.java
  net.ughklirn.utils.types.TypeReactions
 net/ughklirn/connections/Database.java
@@ -49,8 +49,8 @@ net/ughklirn/connections/io/IOReactions.java
  net.ughklirn.connections.io.IOReactions
 net/ughklirn/commands/roles/CmdRolesJoin.java
  net.ughklirn.commands.roles.CmdRolesJoin
-net/ughklirn/commands/music/CmdMusicSkip.java
- net.ughklirn.commands.music.CmdMusicSkip
+net/ughklirn/commands/music/CmdMusicInfo.java
+ net.ughklirn.commands.music.CmdMusicInfo
 net/ughklirn/connections/io/IOInitialize.java
  net.ughklirn.connections.io.IOInitialize
 net/ughklirn/utils/types/TypeRoles.java
@@ -61,10 +61,10 @@ net/ughklirn/utils/types/Types.java
  net.ughklirn.utils.types.Types
 net/ughklirn/utils/texts/Text.java
  net.ughklirn.utils.texts.Text
-net/ughklirn/commands/music/CmdMusicPause.java
- net.ughklirn.commands.music.CmdMusicPause
-net/ughklirn/audio/GuildMusicManager.java
- net.ughklirn.audio.GuildMusicManager
+net/ughklirn/commands/music/CmdMusicRepeat.java
+ net.ughklirn.commands.music.CmdMusicRepeat
+net/ughklirn/commands/music/CmdMusicStop.java
+ net.ughklirn.commands.music.CmdMusicStop
 net/ughklirn/Start.java
  net.ughklirn.Start
 net/ughklirn/utils/types/TypeCommands.java
@@ -73,15 +73,17 @@ net/ughklirn/commands/music/CmdMusicPlay.java
  net.ughklirn.commands.music.CmdMusicPlay
 net/ughklirn/bot/BotDiscord.java
  net.ughklirn.bot.BotDiscord
-net/ughklirn/bot/Bot.java
- net.ughklirn.bot.Bot
+net/ughklirn/commands/poll/CmdPoll.java
+ net.ughklirn.commands.poll.CmdPoll
 net/ughklirn/connections/io/IOCommands.java
  net.ughklirn.connections.io.IOCommands
 net/ughklirn/connections/io/InputOutput.java
  net.ughklirn.connections.io.InputOutput
+net/ughklirn/bot/Bot.java
+ net.ughklirn.bot.Bot
+net/ughklirn/commands/music/CmdMusicClear.java
+ net.ughklirn.commands.music.CmdMusicClear
 net/ughklirn/listener/CommandListener.java
  net.ughklirn.listener.CommandListener
-net/ughklirn/commands/poll/CmdPoll.java
- net.ughklirn.commands.poll.CmdPoll
 net/ughklirn/commands/CommandManager.java
  net.ughklirn.commands.CommandManager

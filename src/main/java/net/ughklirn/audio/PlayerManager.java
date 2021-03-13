@@ -17,8 +17,8 @@ import java.util.Map;
 public class PlayerManager {
     private static PlayerManager INSTANCE;
 
-    private final Map<Long, GuildMusicManager> musicManagers;
-    private final AudioPlayerManager audioPlayerManager;
+    private Map<Long, GuildMusicManager> musicManagers;
+    private AudioPlayerManager audioPlayerManager;
 
     public PlayerManager() {
         this.musicManagers = new HashMap<>();
@@ -30,7 +30,7 @@ public class PlayerManager {
 
     public GuildMusicManager getMusicManager(Guild guild) {
         return this.musicManagers.computeIfAbsent(guild.getIdLong(), (guildId) -> {
-            final GuildMusicManager guildMusicManager = new GuildMusicManager(this.audioPlayerManager);
+            GuildMusicManager guildMusicManager = new GuildMusicManager(this.audioPlayerManager);
 
             guild.getAudioManager().setSendingHandler(guildMusicManager.getSendHandler());
 
@@ -39,7 +39,7 @@ public class PlayerManager {
     }
 
     public void loadAndPlay(TextChannel channel, String trackUrl) {
-        final GuildMusicManager musicManager = this.getMusicManager(channel.getGuild());
+        GuildMusicManager musicManager = this.getMusicManager(channel.getGuild());
 
         this.audioPlayerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
             @Override
@@ -56,7 +56,7 @@ public class PlayerManager {
 
             @Override
             public void playlistLoaded(AudioPlaylist playlist) {
-                final List<AudioTrack> tracks = playlist.getTracks();
+                List<AudioTrack> tracks = playlist.getTracks();
 
                 channel.sendMessage("Adding to queue: `")
                         .append(String.valueOf(tracks.size()))
@@ -65,19 +65,20 @@ public class PlayerManager {
                         .append('`')
                         .queue();
 
-                for (final AudioTrack track : tracks) {
+                for (AudioTrack track : tracks) {
                     musicManager.scheduler.queue(track);
                 }
             }
 
             @Override
             public void noMatches() {
-                //
+                channel.sendMessage("no matched founded").queue();
             }
 
             @Override
             public void loadFailed(FriendlyException exception) {
-                //
+                channel.sendMessage("loadFailed: \n" + exception.getMessage()).queue();
+                exception.printStackTrace();
             }
         });
     }

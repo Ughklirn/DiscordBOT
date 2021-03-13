@@ -43,6 +43,7 @@ public class CommandManager {
         this.addCommandMusic(new CmdMusicStop());
         this.addCommandMusic(new CmdMusicVolume());
         this.addCommandMusic(new CmdMusicPause());
+        this.addCommandMusic(new CmdMusicClear());
 
         /*
          * add commands roles
@@ -211,6 +212,7 @@ public class CommandManager {
             this.lCommandsMusic.add(BotDiscord.getInstance().getIO().getCommands().getRow(((GenericGuildEvent) event).getGuild().getId(), TypeCommands.MUSIC_INFO));
             this.lCommandsMusic.add(BotDiscord.getInstance().getIO().getCommands().getRow(((GenericGuildEvent) event).getGuild().getId(), TypeCommands.MUSIC_QUEUE));
             this.lCommandsMusic.add(BotDiscord.getInstance().getIO().getCommands().getRow(((GenericGuildEvent) event).getGuild().getId(), TypeCommands.MUSIC_REPEAT));
+            this.lCommandsMusic.add(BotDiscord.getInstance().getIO().getCommands().getRow(((GenericGuildEvent) event).getGuild().getId(), TypeCommands.MUSIC_CLEAR));
             /*
              * Commands, Roles
              */
