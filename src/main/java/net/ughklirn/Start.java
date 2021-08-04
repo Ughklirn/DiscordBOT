@@ -8,6 +8,9 @@ public class Start {
 
     public static void main(String[] args) {
         try {
+            Class.forName("org.postgresql.Driver");
+            Class.forName("net.dv8tion.jda.api.JDABuilder");
+
             Bot bot = new BotDiscord(args[0]);
             bot.run();
         } catch (Exception e) {
