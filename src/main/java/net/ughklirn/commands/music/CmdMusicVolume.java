@@ -40,10 +40,11 @@ public class CmdMusicVolume implements ICommand {
         GuildMusicManager musicManager = PlayerManager.getInstance().getMusicManager(ctx.getGuild());
 
         try {
+            String[] args = ctx.getMessage().getContentDisplay().split(" ");
             BotDiscord.getInstance().getIO().getSettings().setRow(ctx.getGuild().getId(), TypeSettings.MUSIC_VOLUME, Integer.parseInt(ctx.getArgs().get(1)));
             musicManager.scheduler.setVolume(ctx.getGuild().getId());
             channel.sendMessage("Change the volume to " + ctx.getArgs().get(1)).queue();
-            musicManager.audioPlayer.setVolume(Integer.parseInt(BotDiscord.getInstance().getIO().getSettings().getRow(ctx.getGuild().getId(), TypeSettings.MUSIC_VOLUME)));
+            musicManager.audioPlayer.setVolume(Integer.parseInt(args[1]));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (NumberFormatException e) {

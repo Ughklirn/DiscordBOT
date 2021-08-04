@@ -10,3 +10,8 @@
 /out/artifacts/DiscordBOT_jar/key.txt
 /out/artifacts/DiscordBOT_jar/tchannel_music.txt
 /out/artifacts/DiscordBOT_jar/tchannel_admin.txt
+/.github/
+/.idea/
+/build/
+/gradle/
+/.gradle/
