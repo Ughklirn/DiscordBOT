@@ -50,7 +50,13 @@ CREATE TABLE commands
     MUSIC_REPEATS    text,
     MUSIC_REPEAT_ALL text,
     MUSIC_PAUSE      text,
-    MUSIC_SKIP       text
+    MUSIC_SKIP       text,
+    MUSIC_QUEUE      text,
+    MUSIC_INFO       text,
+    MUSIC_JOIN       text,
+    MUSIC_CLEAR      text,
+    INIT             text,
+    POLL             text
 );
 
 CREATE TABLE reactions
