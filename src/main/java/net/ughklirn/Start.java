@@ -1,15 +1,22 @@
 package net.ughklirn;
 
-import net.ughklirn.bot.Bot;
-import net.ughklirn.bot.BotDiscord;
+import net.dv8tion.jda.api.sharding.ShardManager;
+import net.ughklirn.bot.BOT;
+import net.ughklirn.bot.BOTImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.security.auth.login.LoginException;
 
 public class Start {
-    //private static final Logger L = LoggerFactory.getLogger(Start.class);
+    private static final Logger L = LoggerFactory.getLogger(Start.class);
+    private ShardManager sm;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws LoginException {
         try {
-            Bot bot = new BotDiscord(args[0]);
-            bot.run();
+            BOT bot = new BOTImpl();
+            Thread t1 = new Thread(bot);
+            t1.run();
         } catch (Exception e) {
             e.printStackTrace();
         }

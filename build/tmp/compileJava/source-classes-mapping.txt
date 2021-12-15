@@ -1,89 +1,47 @@
-net/ughklirn/listener/LogMessageListener.java
- net.ughklirn.listener.LogMessageListener
-net/ughklirn/utils/types/TypeSettings.java
- net.ughklirn.utils.types.TypeSettings
-net/ughklirn/audio/TrackScheduler.java
- net.ughklirn.audio.TrackScheduler
-net/ughklirn/commands/music/CmdMusicPause.java
- net.ughklirn.commands.music.CmdMusicPause
-net/ughklirn/connections/io/IOSettings.java
- net.ughklirn.connections.io.IOSettings
-net/ughklirn/commands/music/CmdMusicVolume.java
- net.ughklirn.commands.music.CmdMusicVolume
-net/ughklirn/commands/music/CmdMusicJoin.java
- net.ughklirn.commands.music.CmdMusicJoin
-net/ughklirn/commands/music/CmdMusicQueue.java
- net.ughklirn.commands.music.CmdMusicQueue
-net/ughklirn/audio/AudioPlayerSendHandler.java
- net.ughklirn.audio.AudioPlayerSendHandler
-net/ughklirn/connections/IDatabase.java
- net.ughklirn.connections.IDatabase
-net/ughklirn/utils/types/TypeChannels.java
- net.ughklirn.utils.types.TypeChannels
-net/ughklirn/commands/music/CmdMusicSkip.java
- net.ughklirn.commands.music.CmdMusicSkip
-net/ughklirn/commands/roles/CmdRolesLeave.java
- net.ughklirn.commands.roles.CmdRolesLeave
-net/ughklirn/commands/CommandContext.java
- net.ughklirn.commands.CommandContext
-net/ughklirn/connections/DbCred.java
- net.ughklirn.connections.DbCred
-net/ughklirn/connections/io/IORoles.java
- net.ughklirn.connections.io.IORoles
-net/ughklirn/commands/ICommand.java
- net.ughklirn.commands.ICommand
-net/ughklirn/audio/GuildMusicManager.java
- net.ughklirn.audio.GuildMusicManager
+net/ughklirn/utils/RoleType.java
+ net.ughklirn.utils.RoleType
+net/ughklirn/listener/AdminEvent.java
+ net.ughklirn.listener.AdminEvent
+net/ughklirn/listener/RolesEvent.java
+ net.ughklirn.listener.RolesEvent
 net/ughklirn/audio/PlayerManager.java
  net.ughklirn.audio.PlayerManager
- net.ughklirn.audio.PlayerManager$1
-net/ughklirn/utils/types/TypeReactions.java
- net.ughklirn.utils.types.TypeReactions
-net/ughklirn/connections/Database.java
- net.ughklirn.connections.Database
-net/ughklirn/connections/JDBCAccess.java
- net.ughklirn.connections.JDBCAccess
-net/ughklirn/connections/io/IOChannels.java
- net.ughklirn.connections.io.IOChannels
-net/ughklirn/connections/io/IOReactions.java
- net.ughklirn.connections.io.IOReactions
-net/ughklirn/commands/roles/CmdRolesJoin.java
- net.ughklirn.commands.roles.CmdRolesJoin
-net/ughklirn/commands/music/CmdMusicInfo.java
- net.ughklirn.commands.music.CmdMusicInfo
-net/ughklirn/connections/io/IOInitialize.java
- net.ughklirn.connections.io.IOInitialize
-net/ughklirn/utils/types/TypeRoles.java
- net.ughklirn.utils.types.TypeRoles
-net/ughklirn/exceptions/DriverFailedException.java
- net.ughklirn.exceptions.DriverFailedException
-net/ughklirn/utils/types/Types.java
- net.ughklirn.utils.types.Types
-net/ughklirn/utils/texts/Text.java
- net.ughklirn.utils.texts.Text
-net/ughklirn/commands/music/CmdMusicRepeat.java
- net.ughklirn.commands.music.CmdMusicRepeat
-net/ughklirn/commands/music/CmdMusicStop.java
- net.ughklirn.commands.music.CmdMusicStop
-net/ughklirn/Start.java
- net.ughklirn.Start
-net/ughklirn/utils/types/TypeCommands.java
- net.ughklirn.utils.types.TypeCommands
-net/ughklirn/commands/music/CmdMusicPlay.java
- net.ughklirn.commands.music.CmdMusicPlay
-net/ughklirn/bot/BotDiscord.java
- net.ughklirn.bot.BotDiscord
-net/ughklirn/commands/poll/CmdPoll.java
- net.ughklirn.commands.poll.CmdPoll
-net/ughklirn/connections/io/IOCommands.java
- net.ughklirn.connections.io.IOCommands
-net/ughklirn/connections/io/InputOutput.java
- net.ughklirn.connections.io.InputOutput
-net/ughklirn/bot/Bot.java
- net.ughklirn.bot.Bot
-net/ughklirn/commands/music/CmdMusicClear.java
- net.ughklirn.commands.music.CmdMusicClear
+net/ughklirn/audio/MusicController.java
+ net.ughklirn.audio.MusicController
+net/ughklirn/audio/AudioTrackClone.java
+ net.ughklirn.audio.AudioTrackClone
+net/ughklirn/utils/Config.java
+ net.ughklirn.utils.Config
+net/ughklirn/audio/TrackScheduler.java
+ net.ughklirn.audio.TrackScheduler
+net/ughklirn/audio/AudioPlayerSendHandler.java
+ net.ughklirn.audio.AudioPlayerSendHandler
 net/ughklirn/listener/CommandListener.java
  net.ughklirn.listener.CommandListener
-net/ughklirn/commands/CommandManager.java
- net.ughklirn.commands.CommandManager
+net/ughklirn/listener/LogMessageListener.java
+ net.ughklirn.listener.LogMessageListener
+net/ughklirn/Start.java
+ net.ughklirn.Start
+net/ughklirn/audio/lavaplayer/GuildMusicManager.java
+ net.ughklirn.audio.lavaplayer.GuildMusicManager
+net/ughklirn/listener/MusicEvent.java
+ net.ughklirn.listener.MusicEvent
+net/ughklirn/audio/DiscordAudioLoadResultHandler.java
+ net.ughklirn.audio.DiscordAudioLoadResultHandler
+net/ughklirn/bot/BOT.java
+ net.ughklirn.bot.BOT
+net/ughklirn/bot/BOTImpl.java
+ net.ughklirn.bot.BOTImpl
+net/ughklirn/audio/lavaplayer/TrackScheduler.java
+ net.ughklirn.audio.lavaplayer.TrackScheduler
+net/ughklirn/utils/DiscordCred.java
+ net.ughklirn.utils.DiscordCred
+net/ughklirn/audio/lavaplayer/AudioPlayerSendHandler.java
+ net.ughklirn.audio.lavaplayer.AudioPlayerSendHandler
+net/ughklirn/audio/lavaplayer/PlayerManager.java
+ net.ughklirn.audio.lavaplayer.PlayerManager
+ net.ughklirn.audio.lavaplayer.PlayerManager$1
+net/ughklirn/listener/PersistenceEvent.java
+ net.ughklirn.listener.PersistenceEvent
+net/ughklirn/wrapper/Wrapper.java
+ net.ughklirn.wrapper.Wrapper
